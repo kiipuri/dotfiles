@@ -60,7 +60,7 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeRed, SchemeRedFg, SchemeYellow, SchemeYellowFg, SchemeGreen, SchemeGreenFg, SchemeBlue, SchemeBlueFg }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
@@ -157,6 +157,8 @@ static void grabbuttons(Client *c, int focused);
 //c->wasfloating = False;
 //c->ismax = False;
 static void grabkeys(void);
+static void grid(Monitor *m);
+static void gaplessgrid(Monitor *m);
 static void incnmaster(const Arg *arg);
 static void keypress(XEvent *e);
 static void killclient(const Arg *arg);
@@ -728,13 +730,27 @@ drawbar(Monitor *m)
 	int boxs = drw->fonts->h / 9;
 	int boxw = drw->fonts->h / 6 + 2;
 	unsigned int i, occ = 0, urg = 0;
+    char *ts = stext;
+    char *tp = stext;
+    int tx = 0;
+    char ctmp;
 	Client *c;
 
 	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon) { /* status is only drawn on selected monitor */
 		drw_setscheme(drw, scheme[SchemeNorm]);
-		sw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
-		drw_text(drw, m->ww - sw, 0, sw, bh, 0, stext, 0);
+		sw = TEXTW(stext) - lrpad + 2;// - 55; /* 2px right padding */
+        while (1) {
+			if ((unsigned int)*ts > LENGTH(colors)) { ts++; continue ; }
+			ctmp = *ts;
+			*ts = '\0';
+			drw_text(drw, m->ww - sw + tx, 0, sw - tx, bh, 0, tp, 0);
+			tx += TEXTW(tp) -lrpad;
+			if (ctmp == '\0') { break; }
+			drw_setscheme(drw, scheme[(unsigned int)(ctmp-1)]);
+			*ts = ctmp;
+			tp = ++ts;
+		}
 	}
 
 	for (c = m->clients; c; c = c->next) {
@@ -989,6 +1005,136 @@ grabkeys(void)
 				for (j = 0; j < LENGTH(modifiers); j++)
 					XGrabKey(dpy, code, keys[i].mod | modifiers[j], root,
 						True, GrabModeAsync, GrabModeAsync);
+	}
+}
+
+void
+grid(Monitor *m) {
+	unsigned int i, n, cx, cy, cw, ch, aw, ah, cols, rows;
+	Client *c;
+
+	for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next))
+		n++;
+
+	/* grid dimensions */
+	for(rows = 0; rows <= n/2; rows++)
+		if(rows*rows >= n)
+			break;
+	cols = (rows && (rows - 1) * rows >= n) ? rows - 1 : rows;
+
+	/* window geoms (cell height/width) */
+	ch = m->wh / (rows ? rows : 1);
+	cw = m->ww / (cols ? cols : 1);
+
+    int extraspace = gappx / 2;
+    int lessx = 0;
+
+	for(i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next)) {
+		cx = m->wx + (i / rows) * cw;
+		cy = m->wy + (i % rows) * ch;
+		/* adjust height/width of last row/column's windows */
+		ah = ((i + 1) % rows == 0) ? m->wh - ch * rows : 0;
+		aw = (i >= rows * (cols - 1)) ? m->ww - cw * cols : 0;
+
+        if(i == rows) {
+            lessx = extraspace;
+        }
+
+        int middleextrax = 0;
+        if(i + 1 > rows && i + 1 <= rows * cols - rows) {
+            middleextrax = extraspace;
+        }
+
+        int middleextray = 0;
+        int lessy = 0;
+        if((i + 1) % rows != 1) {
+            lessy = extraspace;
+
+            if((i + 1) % rows != 0) {
+                middleextray = extraspace;
+            }
+        }
+        int clientX = cx + gappx - lessx;
+        int clientY = cy + gappx - lessy;
+        int clientWidth = cw - 2 * c->bw + aw - 2 * gappx + extraspace + middleextrax;
+        int clientHeight = ch - 2 * c->bw + ah - 2 * gappx + extraspace + middleextray;
+        resize(c, clientX, clientY, clientWidth, clientHeight, False);
+		//resize(c, cx, cy, cw - 2 * c->bw + aw, ch - 2 * c->bw + ah, False);
+		i++;
+	}
+}
+
+void
+gaplessgrid(Monitor *m) {
+	unsigned int i, n, cx, cy, cw, ch, aw, ah, cols, rows, columnNum, rowNum, tallWindow;
+	Client *c;
+
+	for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next))
+		n++;
+
+	/* grid dimensions */
+	for(rows = 0; rows <= n/2; rows++)
+		if(rows*rows >= n)
+			break;
+	cols = (rows && (rows - 1) * rows >= n) ? rows - 1 : rows;
+
+	/* window geoms (cell height/width) */
+	ch = m->wh / (rows ? rows : 1);
+	cw = m->ww / (cols ? cols : 1);
+
+    int extraspace = gappx / 2;
+    int lessx = 0;
+
+    columnNum = 1;
+    rowNum = 1;
+
+	for(i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next)) {
+        tallWindow = 1;
+        if(n < rows * cols) {
+            int lastWindowRow = n % rows;
+            
+            if(columnNum == cols && rowNum == lastWindowRow) {
+                tallWindow = rows - lastWindowRow + 1;
+            }
+        }
+
+		cx = m->wx + (i / rows) * cw;
+		cy = m->wy + (i % rows) * ch;
+		/* adjust height/width of last row/column's windows */
+		ah = ((i + 1) % rows == 0) ? m->wh - ch * rows : 0;
+		aw = (i >= rows * (cols - 1)) ? m->ww - cw * cols : 0;
+
+        if(i == rows) {
+            lessx = extraspace;
+        }
+
+        int middleextrax = 0;
+        if(i + 1 > rows && i + 1 <= rows * cols - rows) {
+            middleextrax = extraspace;
+        }
+
+        int middleextray = 0;
+        int lessy = 0;
+        if((i + 1) % rows != 1) {
+            lessy = extraspace;
+
+            if((i + 1) % rows != 0) {
+                middleextray = extraspace;
+            }
+        }
+        int clientX = cx + gappx - lessx;
+        int clientY = cy + gappx - lessy;
+        int clientWidth = cw - 2 * c->bw + aw - 2 * gappx + extraspace + middleextrax;
+        int clientHeight = ch - 2 * c->bw + ah - 2 * gappx + extraspace + middleextray;
+        clientHeight *= tallWindow;
+        clientHeight += (tallWindow - 1) * gappx;
+        resize(c, clientX, clientY, clientWidth, clientHeight, False);
+		i++;
+        rowNum++;
+        if(rowNum > rows) {
+            rowNum = 1;
+            columnNum++;
+        }
 	}
 }
 

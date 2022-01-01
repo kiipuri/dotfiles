@@ -2,29 +2,44 @@
 
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
-static const unsigned int gappx     = 10;        /* gaps between windows */
+static const unsigned int gappx     = 14;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int scalepreview       = 4;        /* tag preview scaling */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "JetBrainsMono Nerd Font:style:medium:size=16" };
-static const char dmenufont[]       = { "JetBrainsMono Nerd Font:style:medium:size=16" };
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+//static const char *fonts[]          = { "JetBrainsMono Nerd Font:style:medium:size=16" };
+static const char *fonts[]          = { "mplus Nerd Font:style=regular:size=16" };
+//static const char dmenufont[]       = { "JetBrainsMono Nerd Font:style:medium:size=16" };
+static const char dmenufont[]          = { "Comfortaa:style=Regular:size=16" };
+static const char gray2[]       = "#444444";
+static const char red[]         = "#ff0000";
+static const char yellow[]      = "#ffff00";
+static const char white[]       = "#ffffff";
+static const char green[]       = "#00ff00";
+static const char blue[]        = "#0000ff";
+static const char col1[]        = "#373e4d"; /* bg */
+static const char col2[]        = "#eeeeef"; /* light gray */
+static const char col3[]        = "#fa5aa4"; /* pink */
+static const char col4[]        = "#89ccf7"; /* light blue */
+static const char col5[]        = "#434c5e"; /* light bg */
 
-#include "theme.h"
 
 static const char *colors[][3]      = {
-    /*               fg         bg         border   */
-    [SchemeNorm]       = { col_gray3, gray2, gray2 },
-    [SchemeSel]        = { blue, gray2, gray2  }
+    /*                      fg          bg          border   */
+    [SchemeNorm]        = { col2,  col1,  col2 },
+    [SchemeSel]         = { col3,   col1,  col3 },
+	[SchemeRed]         = { col2,  red,    red },
+    [SchemeRedFg]       = { red,    col1,  white },
+	[SchemeYellow]      = { col2,  yellow, yellow },
+	[SchemeYellowFg]    = { yellow, red,    white },
+    [SchemeGreen]       = { col2,  green,  green },
+    [SchemeGreenFg]     = { green,  yellow, white },
+    [SchemeBlue]        = { white,  blue,   blue },
+    [SchemeBlueFg]      = { blue,   green,  white },
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -38,7 +53,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
@@ -47,6 +62,8 @@ static const Layout layouts[] = {
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+    { "HHH",      grid },
+    { "###",      gaplessgrid },
 };
 
 /* key definitions */
@@ -62,7 +79,8 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-c", "-l", "10", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+//static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-c", "-l", "10", "-fn", dmenufont, "-nb", col1, "-nf", col2, "-sb", col3, "-sf", col2, NULL };
+static const char *dmenucmd[] = { "./.dwm/dmenu_recent_aliases.sh", "-m", dmenumon, "-c", "-l", "10", "-fn", dmenufont, "-nb", col1, "-nf", col2, "-sb", col3, "-sf", col2, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *screenshot[]	  = { "./scripts/ss.sh", NULL };
 static const char *audiorec[] = { "./scripts/audio.sh", NULL };
@@ -84,6 +102,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+    { MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
+    { MODKEY,                       XK_y,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },

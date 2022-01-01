@@ -1,0 +1,18 @@
+#!/bin/sh
+
+export GTK_IM_MODULE=fcitx &
+export QT_IM_MODULE=fcitx &
+export XMODIFIERS="@im=fcitx" &
+
+nitrogen --restore &
+picom --experimental-backends --config ~/.config/picom/picom.conf &
+slstatus &
+discord &
+gwe &
+lxsession &
+fcitx5 &
+copyq &
+bash -c "cd ~/Downloads/T-Rex && ./ETH-ethermine.sh" &
+~/.dwm/./monitors.sh
+#exec dbus-launch --sh-syntax --exit-with-session ~/.dwm/startdwm
+exec dbus-launch ~/.dwm/startdwm

@@ -737,7 +737,7 @@ drawbar(Monitor *m)
 	Client *c;
 
 	/* draw status first so it can be overdrawn by tags later */
-	if (m == selmon) { /* status is only drawn on selected monitor */
+	//if (m == selmon) { /* status is only drawn on selected monitor */
 		drw_setscheme(drw, scheme[SchemeNorm]);
 		sw = TEXTW(stext) - lrpad + 2;// - 55; /* 2px right padding */
         while (1) {
@@ -751,7 +751,7 @@ drawbar(Monitor *m)
 			*ts = ctmp;
 			tp = ++ts;
 		}
-	}
+	//}
 
 	for (c = m->clients; c; c = c->next) {
 		occ |= c->tags;

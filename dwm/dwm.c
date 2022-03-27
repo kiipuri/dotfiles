@@ -1104,28 +1104,35 @@ gaplessgrid(Monitor *m) {
 		ah = ((i + 1) % rows == 0) ? m->wh - ch * rows : 0;
 		aw = (i >= rows * (cols - 1)) ? m->ww - cw * cols : 0;
 
-        if(i == rows) {
+        if(i == rows && rows != 1) {
             lessx = extraspace;
         }
 
         int middleextrax = 0;
-        if(i + 1 > rows && i + 1 <= rows * cols - rows) {
+        if(i + 1 > rows && i + 1 <= rows * cols - rows && rows != 1 && cols != 1) {
             middleextrax = extraspace;
         }
 
         int middleextray = 0;
         int lessy = 0;
-        if((i + 1) % rows != 1) {
+        if((i + 1) % rows != 1 && rows != 1) {
             lessy = extraspace;
 
             if((i + 1) % rows != 0) {
                 middleextray = extraspace;
             }
         }
+
+        int anotherstupidfix = 0;
+        if(rows == 1 || cols == 1) {
+            //extraspace = 0;
+            anotherstupidfix = -10;
+        }
+
         int clientX = cx + gappx - lessx;
         int clientY = cy + gappx - lessy;
-        int clientWidth = cw - 2 * c->bw + aw - 2 * gappx + extraspace + middleextrax;
-        int clientHeight = ch - 2 * c->bw + ah - 2 * gappx + extraspace + middleextray;
+        int clientWidth = cw - 2 * c->bw + aw - 2 * gappx + extraspace + middleextrax + anotherstupidfix;
+        int clientHeight = ch - 2 * c->bw + ah - 2 * gappx + extraspace + middleextray + anotherstupidfix;
         clientHeight *= tallWindow;
         clientHeight += (tallWindow - 1) * gappx;
         resize(c, clientX, clientY, clientWidth, clientHeight, False);

@@ -47,9 +47,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class	instance	title	tags mask	isfloating	monitor */
-	{ "discord",	NULL,		NULL,	1 << 2,		0,		-1 },
-	{ "Anki",	NULL,		"Migaku Dictionary", 0, 1,		0 },
-	{ "st-256color", NULL,		"./ETH-ethermine.sh\\", 1 << 1, 0,	-1 }
+	{ "discord",	NULL,		NULL,	1 << 1,		0,		1 },
 };
 
 /* layout(s) */
@@ -81,7 +79,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 //static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-c", "-l", "10", "-fn", dmenufont, "-nb", col1, "-nf", col2, "-sb", col3, "-sf", col2, NULL };
 static const char *dmenucmd[] = { "./.dwm/dmenu_recent_aliases.sh", "-m", dmenumon, "-c", "-l", "10", "-fn", dmenufont, "-nb", col1, "-nf", col2, "-sb", col3, "-sf", col2, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "urxvt", NULL };
 static const char *screenshot[]	  = { "./scripts/ss.sh", NULL };
 static const char *audiorec[] = { "./scripts/audio.sh", NULL };
 
@@ -125,8 +123,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ 0,			XK_Print,	   spawn,	   {.v = screenshot } },
-	{ ShiftMask,			XK_Print,	   spawn,	   {.v = audiorec } },
+	{ 0,			                XK_Print,  spawn,	       {.v = screenshot } },
+	{ ShiftMask,			        XK_Print,  spawn,	       {.v = audiorec } },
 };
 
 /* button definitions */

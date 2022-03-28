@@ -1,0 +1,11 @@
+URxvt.background:   #282a36
+URxvt.foreground:   #fa5aa4
+URxvt.font:         xft:Operator Mono:size=18,\
+                    xft:MesloLGS NF:size=17
+URxvt.internalBorder: 10
+URxvt.scrollBar: false
+URxvt.cursorBlink:  true
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt.iso14755: false
+URxvt.iso14755_52: false

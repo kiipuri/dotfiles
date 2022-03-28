@@ -78,7 +78,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 //static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-c", "-l", "10", "-fn", dmenufont, "-nb", col1, "-nf", col2, "-sb", col3, "-sf", col2, NULL };
-static const char *dmenucmd[] = { "./.dwm/dmenu_recent_aliases.sh", "-m", dmenumon, "-c", "-l", "10", "-fn", dmenufont, "-nb", col1, "-nf", col2, "-sb", col3, "-sf", col2, NULL };
+static const char *dmenucmd[] = { "~/scripts/dmenu_recent_aliases.sh", "-m", dmenumon, "-c", "-l", "10", "-fn", dmenufont, "-nb", col1, "-nf", col2, "-sb", col3, "-sf", col2, NULL };
 static const char *termcmd[]  = { "urxvt", NULL };
 static const char *screenshot[]	  = { "./scripts/ss.sh", NULL };
 static const char *audiorec[] = { "./scripts/audio.sh", NULL };

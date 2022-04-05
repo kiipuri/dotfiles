@@ -1,1 +1,4 @@
-xorg xorg-xinit imlib2 rxvt-unicode
+xorg
+xorg-xinit
+imlib2
+rxvt-unicode

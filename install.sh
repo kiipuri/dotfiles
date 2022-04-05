@@ -1,22 +1,30 @@
 #!/bin/sh
 
-if [ -z "$(echo $SUDO_USER)" ]
-then
-    echo "Run as sudo"
-    exit 1
-fi
+cd dwm && sudo make install
+cd ../dmenu && sudo make install
+cd ..
 
-homedir="/home/$(echo $SUDO_USER)"
+cp -rp scripts ~/
+cp -p .Xresources ~/
+cp -p .vimrc ~/
 
-cd dwm && make install
+sudo mkdir --parents /usr/local/share/fonts/dotfiles
+sudo cp -rp fonts/* /usr/local/share/fonts/dotfiles
+fc-cache
 
-cd ../dmenu && make install
+sudo pacman -Syu
+sudo pacman -S - < packages.txt
 
-cd ../slstatus && make install
+git clone https://aur.archlinux.org/yay-git.git
+cd yay-git
+makepkg -si
 
 cd ..
-cp -rp scripts $homedir
-cp -p .Xresources $homedir
-mkdir --parents /usr/local/share/fonts/dotfiles
-cp -rp fonts/* /usr/local/share/fonts/dotfiles
-fc-cache
+rm -rf yay-git
+
+yay -S aur/vundle
+vim +PluginInstall +qall
+
+cd ~/
+touch .xinitrc
+echo "xrandr --output Virtual-1 --mode 1920x1080\nexec dwm" > .xinitrc

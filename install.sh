@@ -12,7 +12,7 @@ sudo mkdir --parents /usr/local/share/fonts/dotfiles
 sudo cp -rp fonts/* /usr/local/share/fonts/dotfiles
 fc-cache
 
-sudo pacman -Syu
+sudo pacman -Syu --noconfirm
 sudo pacman -S - < packages.txt --noconfirm
 
 git clone https://aur.archlinux.org/yay-git.git

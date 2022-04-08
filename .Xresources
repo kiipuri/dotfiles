@@ -1,5 +1,5 @@
-URxvt.font:         xft:Operator Mono Book:size=18,\
-                    xft:MesloLGS NF:size=17
+URxvt.font:                 xft:Operator Mono Book:size=18,\
+                            xft:MesloLGS NF:size=18
 URxvt.internalBorder: 10
 URxvt.scrollBar: false
 URxvt.cursorBlink:  true
@@ -26,3 +26,8 @@ URxvt.iso14755_52: false URxvt.keysym.Control-l: command:\033c
 *.color14:    #9AEDFE
 *.color7:     #BFBFBF
 *.color15:    #E6E6E6
+
+dmenu.foreground:       #E6E6E6
+dmenu.background:       #373E4D
+dmenu.selbackground:    #FA5AA4 
+dmenu.selforeground:    #E6E6E6

@@ -2,3 +2,6 @@ xorg
 xorg-xinit
 imlib2
 rxvt-unicode
+zsh
+oh-my-zsh
+pacman-contrib

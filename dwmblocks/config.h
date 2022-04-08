@@ -1,5 +1,5 @@
 /* macro for conveniently specifying pathu and pathc below */
-#define PATH(name)                      "/home/kiipuri/scripts/dwmblocks/blocks/"name
+#define PATH(name)                      "/home/kiipuri/scripts/blocks/"name
 
 /* buffer size for capturing output of the programs used for updating blocks */
 #define CMDOUTLENGTH                    50

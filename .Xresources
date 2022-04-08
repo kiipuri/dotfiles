@@ -1,5 +1,5 @@
 URxvt.font:                 xft:Operator Mono Book:size=18,\
-                            xft:MesloLGS NF:size=18
+                            xft:MesloLGS NF:size=17
 URxvt.internalBorder: 10
 URxvt.scrollBar: false
 URxvt.cursorBlink:  true

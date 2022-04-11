@@ -40,14 +40,15 @@
 #include <X11/extensions/Xinerama.h>
 #endif /* XINERAMA */
 #include <X11/Xft/Xft.h>
+
+#include <fcntl.h>
+#include <Imlib2.h>
 #include <X11/Xlib-xcb.h>
 #include <xcb/res.h>
 #ifdef __OpenBSD__
 #include <sys/sysctl.h>
 #include <kvm.h>
 #endif /* __OpenBSD */
-#include <fcntl.h>
-#include <Imlib2.h>
 
 #include "drw.h"
 #include "util.h"
@@ -107,9 +108,11 @@ struct Client {
 	int bw, oldbw;
 	unsigned int tags;
 	//int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
-	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen, isterminal, noswallow;
+        //int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen, isterminal, noswallow;
+        //int isterminal, noswallow;
 	pid_t pid;
-	//Bool ismax, wasfloating, isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
+	int isterminal;
+	Bool noswallow, ismax, wasfloating, isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
 	Client *next;
 	Client *snext;
 	Client *swallowing;
@@ -1908,6 +1911,8 @@ setup(void)
 	sp = sidepad;
 	vp = (topbar == 1) ? vertpad : - vertpad;
 	updategeom();
+	sp = sidepad;
+	vp = (topbar == 1) ? vertpad : - vertpad;
 
 	/* init atoms */
 	utf8string = XInternAtom(dpy, "UTF8_STRING", False);
@@ -1936,6 +1941,7 @@ setup(void)
 	/* init bars */
 	updatebars();
 	updatestatus();
+	updatebarpos(selmon);
 	updatepreview();
 	/* supporting window for NetWMCheck */
 	wmcheckwin = XCreateSimpleWindow(dpy, root, 0, 0, 1, 1, 0, 0, 0);

@@ -40,7 +40,12 @@
 #include <X11/extensions/Xinerama.h>
 #endif /* XINERAMA */
 #include <X11/Xft/Xft.h>
-
+#include <X11/Xlib-xcb.h>
+#include <xcb/res.h>
+#ifdef __OpenBSD__
+#include <sys/sysctl.h>
+#include <kvm.h>
+#endif /* __OpenBSD */
 #include <fcntl.h>
 #include <Imlib2.h>
 #include <X11/Xlib-xcb.h>
@@ -108,10 +113,8 @@ struct Client {
 	int bw, oldbw;
 	unsigned int tags;
 	//int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
-        //int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen, isterminal, noswallow;
-        //int isterminal, noswallow;
 	pid_t pid;
-	int isterminal;
+	int isterminal; 
 	Bool noswallow, ismax, wasfloating, isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
 	Client *next;
 	Client *snext;
@@ -1911,8 +1914,6 @@ setup(void)
 	sp = sidepad;
 	vp = (topbar == 1) ? vertpad : - vertpad;
 	updategeom();
-	sp = sidepad;
-	vp = (topbar == 1) ? vertpad : - vertpad;
 
 	/* init atoms */
 	utf8string = XInternAtom(dpy, "UTF8_STRING", False);

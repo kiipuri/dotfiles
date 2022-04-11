@@ -4,14 +4,25 @@
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int gappx     = 14;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
+<<<<<<< HEAD
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int scalepreview       = 4;        /* tag preview scaling */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int vertpad            = 10;       /* vertical padding of bar */
-static const int sidepad            = 10;       /* horizontal padding of bar */
+static const int vertpad            = 10;
+static const int sidepad            = 10;
+static const char *fonts[]          = { "mplus Nerd Font:style=regular:size=16" };
+static const char dmenufont[]       = { "Comfortaa:style=Regular:size=16" };
+=======
+static const int swallowfloating    = 0;
+static const int scalepreview       = 4;        /* tag preview scaling */
+static const int showbar            = 1;        /* 0 means no bar */
+static const int topbar             = 1;        /* 0 means bottom bar */
+static const int vertpad	    = 10;
+static const int sidepad	    = 10;
 static const char *fonts[]          = { "mplus Nerd Font:style=regular:size=16" };
 static const char dmenufont[]          = { "Comfortaa:style=Regular:size=16" };
+>>>>>>> temp
 /*static const char gray2[]       = "#444444";
 static const char red[]         = "#ff0000";
 static const char yellow[]      = "#ffff00";
@@ -71,10 +82,16 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-	{ "discord",	NULL,	  NULL,		  1 << 1,    0,		 0,	      0, 	-1 },
-	{ "URxvt",      NULL,     NULL,           0,         0,          1,           0,        -1 },
-	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
+<<<<<<< HEAD
+	/* class      instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
+	{ "discord",  NULL,     NULL,           1 << 1,         0,          0,           0,        1 },
+	{ "URxvt",    NULL,     NULL,           0,         0,          1,           0,        -1 },
+	{ NULL,    NULL,     "Event Tester",    0,         0,          0,           1,        -1 },
+=======
+	/* class	instance	title	tags mask	isfloating	monitor */
+	{ "discord",	NULL,		NULL,	1 << 1,	0,	1,	0,	-1 },
+	{ "URxvt",	NULL,		NULL,	0,	0,	1,	0,	-1 },
+>>>>>>> temp
 };
 
 /* layout(s) */
@@ -128,8 +145,13 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+<<<<<<< HEAD
+   	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
+    	{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[4]} },
+=======
         { MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
         { MODKEY,                       XK_y,      setlayout,      {.v = &layouts[4]} },
+>>>>>>> temp
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },

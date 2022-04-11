@@ -4,12 +4,14 @@
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int gappx     = 14;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const int swallowfloating    = 0;
+static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int scalepreview       = 4;        /* tag preview scaling */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const int vertpad            = 10;
+static const int sidepad            = 10;
 static const char *fonts[]          = { "mplus Nerd Font:style=regular:size=16" };
-static const char dmenufont[]          = { "Comfortaa:style=Regular:size=16" };
+static const char dmenufont[]       = { "Comfortaa:style=Regular:size=16" };
 /*static const char gray2[]       = "#444444";
 static const char red[]         = "#ff0000";
 static const char yellow[]      = "#ffff00";
@@ -51,10 +53,10 @@ static const char *colors[][3]      = {
     *                      fg          bg          border   *
     [SchemeNorm]        = { col2,  col1,  col2 },
     [SchemeSel]         = { col3,   col1,  col3 },
-	[SchemeRed]         = { col2,  red,    red },
+    [SchemeRed]         = { col2,  red,    red },
     [SchemeRedFg]       = { red,    col1,  white },
-	[SchemeYellow]      = { col2,  yellow, yellow },
-	[SchemeYellowFg]    = { yellow, red,    white },
+    [SchemeYellow]      = { col2,  yellow, yellow },
+    [SchemeYellowFg]    = { yellow, red,    white },
     [SchemeGreen]       = { col2,  green,  green },
     [SchemeGreenFg]     = { green,  yellow, white },
     [SchemeBlue]        = { white,  blue,   blue },
@@ -69,9 +71,10 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class	instance	title	tags mask	isfloating	monitor */
-	{ "discord",	NULL,		NULL,	1 << 1,	0,	1,	0,	-1 },
-	{ "URxvt",	NULL,		NULL,	0,	0,	1,	0,	-1 },
+	/* class      instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
+	{ "discord",  NULL,     NULL,           1 << 1,         0,          0,           0,        1 },
+	{ "URxvt",    NULL,     NULL,           0,         0,          1,           0,        -1 },
+	{ NULL,    NULL,     "Event Tester",    0,         0,          0,           1,        -1 },
 };
 
 /* layout(s) */

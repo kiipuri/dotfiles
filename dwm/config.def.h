@@ -8,9 +8,9 @@ static const int swallowfloating    = 0;
 static const int scalepreview       = 4;        /* tag preview scaling */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-//static const char *fonts[]          = { "JetBrainsMono Nerd Font:style:medium:size=16" };
+static const int vertpad            = 10;       /* vertical padding of bar */
+static const int sidepad            = 10;       /* horizontal padding of bar */
 static const char *fonts[]          = { "mplus Nerd Font:style=regular:size=16" };
-//static const char dmenufont[]       = { "JetBrainsMono Nerd Font:style:medium:size=16" };
 static const char dmenufont[]          = { "Comfortaa:style=Regular:size=16" };
 /*static const char gray2[]       = "#444444";
 static const char red[]         = "#ff0000";
@@ -92,7 +92,7 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \

@@ -4,12 +4,13 @@
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int gappx     = 14;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
+static const int swallowfloating    = 0;
 static const int scalepreview       = 4;        /* tag preview scaling */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-//static const char *fonts[]          = { "JetBrainsMono Nerd Font:style:medium:size=16" };
+static const int vertpad	    = 10;
+static const int sidepad	    = 10;
 static const char *fonts[]          = { "mplus Nerd Font:style=regular:size=16" };
-//static const char dmenufont[]       = { "JetBrainsMono Nerd Font:style:medium:size=16" };
 static const char dmenufont[]          = { "Comfortaa:style=Regular:size=16" };
 /*static const char gray2[]       = "#444444";
 static const char red[]         = "#ff0000";
@@ -71,7 +72,8 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class	instance	title	tags mask	isfloating	monitor */
-	{ "discord",	NULL,		NULL,	1 << 1,		0,		1 },
+	{ "discord",	NULL,		NULL,	1 << 1,	0,	1,	0,	-1 },
+	{ "URxvt",	NULL,		NULL,	0,	0,	1,	0,	-1 },
 };
 
 /* layout(s) */
@@ -89,7 +91,7 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -111,12 +113,12 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_v,      shiftview,     {.i = -1 } },
-	{ MODKEY,                       XK_n,      shiftview,     {.i = +1 } },
+	{ MODKEY,                       XK_u,      shiftview,     {.i = -1 } },
+	{ MODKEY,                       XK_i,      shiftview,     {.i = +1 } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+//	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
+//	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
@@ -125,8 +127,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-    { MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
-    { MODKEY,                       XK_y,      setlayout,      {.v = &layouts[4]} },
+        { MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
+        { MODKEY,                       XK_y,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },

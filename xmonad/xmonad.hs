@@ -15,8 +15,7 @@ import XMonad.Util.Run
 import XMonad.Actions.CycleWS
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.StatusBar
-import XMonad.Hooks.StatusBar.PP
+import XMonad.Util.EZConfig
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -70,7 +69,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "dmenu_run")
+    , ((modm,               xK_p     ), spawn "./scripts/dmenu_recent_aliases.sh -c -l 10")
 
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
@@ -148,7 +147,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     --
     [((m .|. modm, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
     ++
 
     --
@@ -267,7 +266,8 @@ myStartupHook = return ()
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-    xmproc <- spawnPipe "xmobar -x 0 /home/kiipuri/.config/xmobar/xmobarrc"
+    xmproc0 <- spawnPipe "xmobar -x 0 /home/kiipuri/.config/xmobar/xmobarrc"
+    xmproc1 <- spawnPipe "xmobar -x 1 /home/kiipuri/.config/xmobar/xmobarrc1"
     xmonad $ docks $ def {
       -- simple stuff
         terminal           = myTerminal,
@@ -289,13 +289,14 @@ main = do
         handleEventHook    = myEventHook,
         --logHook            = myLogHook xmproc,
         logHook            = dynamicLogWithPP $ xmobarPP
-	{ ppOutput = hPutStrLn xmproc
-, ppTitle = xmobarColor "#22ccdd" "" . shorten 100
-	, ppCurrent = xmobarColor "#fa2aa4" "" . wrap "[" "]"
+    { ppOutput          = \x -> hPutStrLn xmproc0 x
+                             >> hPutStrLn xmproc1 x
+    , ppTitle           = xmobarColor "#22ccdd" "" . shorten 100
+	, ppCurrent         = xmobarColor "#fa2aa4" "" . wrap "[" "]"
 	--, ppCurrent = xmobarColor "#fa2aa4" "" . wrap "<box type=Top width=2> " " </box>"
 	, ppSep = "   "
-    , ppVisible = xmobarColor "#eeeeef" ""
-    , ppHidden = xmobarColor "#bd93f9" "" . wrap "<box type=Top width=2> " " </box>"
+    , ppVisible         = xmobarColor "#eeeeef" ""
+    , ppHidden          = xmobarColor "#bd93f9" "" . wrap "<box type=Top width=2> " " </box>"
     , ppHiddenNoWindows = xmobarColor "#eeeeef" "" . pad
 	},
         startupHook        = myStartupHook

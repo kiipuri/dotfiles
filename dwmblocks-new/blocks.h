@@ -1,7 +1,7 @@
 //Modify this file to change what commands output to your statusbar, and recompile using the make command.
 static const Block blocks[] = {
 	/*Icon*/	/*Command*/		/*Update Interval*/	/*Update Signal*/
-    {"  ", "echo $(checkupdates | wc -l) updates",                    600,    0},
+    {" ", "echo $(checkupdates | wc -l) updates",                    600,    0},
 	{"  ", "date +'%A, %d.%m.%Y'",					5,		0},
     {"  ", "date +'%H:%M'",                           5,      0},
 };

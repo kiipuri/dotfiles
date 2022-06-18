@@ -61,11 +61,14 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "./scripts/dmenu_recent_aliases.sh", "-c", "-l", "10", "-m", dmenumon, "-fn", dmenufont, "-nb", darkgray, "-nf", white, "-sb", green, "-sf", white, NULL };
 static const char *termcmd[]  = { "urxvt", NULL };
+static const char scratchpadname[] = "pulsemixer";
+static const char *scratchpadcmd[] = { "urxvt", "-geometry", "50x18", "-e", "pulsemixer", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_y,      togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
     { MODKEY,                       XK_v,      shiftview,      {.i = -1 } },
     { MODKEY,                       XK_n,      shiftview,      {.i = +1 } },

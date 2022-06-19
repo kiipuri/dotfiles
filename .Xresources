@@ -33,8 +33,6 @@ URxvt.keysym.Control-Right:  \033[1;5CRxvt.iso14755_52: false URxvt.keysym.Contr
 
 dmenu.font:             Comfortaa:style=Regular:size=16
 dmenu.foreground:       #E6E6E6
-! dmenu.background:       #373E4D
 dmenu.background:       #1B1E2B
-! dmenu.selbackground:    #FA5AA4 
 dmenu.selbackground:    #39FF14
 dmenu.selforeground:    #1B1E2B

@@ -1,15 +1,19 @@
 URxvt.font:                 xft:Operator Mono Book:size=18,\
-                            xft:MesloLGS NF:size=17
+                            xft:MesloLGSDZ Nerd Font Mono:size=16
 URxvt.internalBorder: 10
 URxvt.scrollBar: false
 URxvt.cursorBlink:  true
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 URxvt.iso14755: false
-URxvt.iso14755_52: false URxvt.keysym.Control-l: command:\033c
+URxvt.keysym.Control-Up:     \033[1;5A
+URxvt.keysym.Control-Down:   \033[1;5B
+URxvt.keysym.Control-Left:   \033[1;5D
+URxvt.keysym.Control-Right:  \033[1;5CRxvt.iso14755_52: false URxvt.keysym.Control-l: command:\033c
 ! Dracula Xresources palette
 *.foreground: #F8F8F2
-*.background: #282A36
+! *.background: #282A36
+*.background: #1B1E2B
 *.color0:     #000000
 *.color8:     #4D4D4D
 *.color1:     #FF5555
@@ -27,7 +31,10 @@ URxvt.iso14755_52: false URxvt.keysym.Control-l: command:\033c
 *.color7:     #BFBFBF
 *.color15:    #E6E6E6
 
+dmenu.font:             Comfortaa:style=Regular:size=16
 dmenu.foreground:       #E6E6E6
-dmenu.background:       #373E4D
-dmenu.selbackground:    #FA5AA4 
-dmenu.selforeground:    #E6E6E6
+! dmenu.background:       #373E4D
+dmenu.background:       #1B1E2B
+! dmenu.selbackground:    #FA5AA4 
+dmenu.selbackground:    #39FF14
+dmenu.selforeground:    #1B1E2B

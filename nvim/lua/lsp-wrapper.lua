@@ -2,6 +2,7 @@ require'lsp/python-ls'
 require'lsp/lua-ls'
 require"lsp/bash-ls"
 require"lsp/c-ls"
+require"lsp/rust-ls"
 
 
 -- Add additional capabilities supported by nvim-cmp

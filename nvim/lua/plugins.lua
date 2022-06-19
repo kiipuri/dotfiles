@@ -13,6 +13,7 @@ packer.startup(function()
         },
         config = {
             auto_reload_on_write = true,
+            update_cwd = true,
         }
     }
     use 'kyazdani42/blue-moon'
@@ -57,8 +58,13 @@ packer.startup(function()
     }
     use "jiangmiao/auto-pairs"
     use "romgrk/barbar.nvim"
+    use "mfussenegger/nvim-dap"
+    use "mfussenegger/nvim-dap-python"
+    use "rcarriga/nvim-dap-ui"
 end)
 
 require"colorizer".setup ()
 require"lualine".setup {}
 require"nvim-tree".setup {}
+require"dapui".setup {}
+require"dap-python".setup ("/usr/bin/python", {})

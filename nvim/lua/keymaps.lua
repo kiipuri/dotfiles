@@ -32,6 +32,7 @@ keymap("n", "<Leader>n", "<Cmd>NvimTreeToggle<CR>", opts)
 
 -- Telescope
 keymap("n", "<Leader>ff", "<Cmd>Telescope find_files<CR>", opts)
+keymap("n", "<leader>fp", "<Cmd>Telescope projects<CR>", opts)
 
 -- Barbar
 keymap("n", "<Tab>", "<Cmd>BufferNext<CR>", opts)

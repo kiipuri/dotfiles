@@ -4,6 +4,8 @@ packer.init {}
 local use = packer.use
 packer.reset()
 
+require"alpha-dashboard"
+
 packer.startup(function()
     use "wbthomason/packer.nvim"
     use {
@@ -11,10 +13,6 @@ packer.startup(function()
         requires = {
             "kyazdani42/nvim-web-devicons",
         },
-        config = {
-            auto_reload_on_write = true,
-            update_cwd = true,
-        }
     }
     use 'kyazdani42/blue-moon'
     use "folke/tokyonight.nvim"
@@ -47,6 +45,9 @@ packer.startup(function()
             ignore_install = { "lua" },
             highlight = {
                 enable = true
+            },
+            autopairs = {
+                enable = true
             }
         } end
     }
@@ -61,10 +62,38 @@ packer.startup(function()
     use "mfussenegger/nvim-dap"
     use "mfussenegger/nvim-dap-python"
     use "rcarriga/nvim-dap-ui"
+    use "numToStr/Comment.nvim"
+    use "ahmedkhalf/project.nvim"
+    use "RRethy/vim-illuminate"
+    use {
+        "goolord/alpha-nvim",
+        config = function()
+            require"alpha".setup(require"alpha.themes.dashboard".config)
+        end
+    }
 end)
 
 require"colorizer".setup ()
 require"lualine".setup {}
-require"nvim-tree".setup {}
+require"nvim-tree".setup {
+        auto_reload_on_write = true,
+        respect_buf_cwd = true,
+        update_cwd = true,
+        update_focused_file = {
+            enable = true,
+            update_cwd = true
+        }
+}
 require"dapui".setup {}
 require"dap-python".setup ("/usr/bin/python", {})
+require"Comment".setup {}
+require"project_nvim".setup {}
+require"telescope".load_extension"projects"
+
+function _ADD_CURR_DIR_TO_PROJECTS()
+  local historyfile = require("project_nvim.utils.path").historyfile
+  local curr_directory = vim.fn.expand("%:p:h")
+  vim.cmd("!echo " .. curr_directory .. " >> " .. historyfile)
+end
+
+vim.cmd("command! ProjectAddManually lua _ADD_CURR_DIR_TO_PROJECTS()")

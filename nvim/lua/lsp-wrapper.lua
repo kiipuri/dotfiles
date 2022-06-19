@@ -15,7 +15,9 @@ local lspconfig = require('lspconfig')
 local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
-    -- on_attach = my_custom_on_attach,
+    o_attach = function(client)
+        require "illuminate".on_attach(client)
+    end,
     capabilities = capabilities,
   }
 end

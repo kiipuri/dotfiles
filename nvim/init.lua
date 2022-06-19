@@ -8,9 +8,10 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.clipboard = "unnamedplus"
 
-require'keymaps'
-require'plugins'
-require'lsp-wrapper'
+require"keymaps"
+require"plugins"
+require"lsp-wrapper"
+require"autocommands"
 
 vim.g.tokyonight_style = "night"
 vim.api.nvim_command [[colorscheme tokyonight]]

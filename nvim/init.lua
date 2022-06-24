@@ -1,21 +1,18 @@
-vim.g.mapleader = ","
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.cursorline = true
-vim.opt.termguicolors = true
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.opt.clipboard = "unnamedplus"
+require"user.options"
+require"user.keymaps"
+require"user.alpha"
+require"user.plugins"
+require"user.lsp-wrapper"
+require"user.autocommands"
+require"user.trouble"
+require"user.treesitter"
+require"user.colorizer"
+require"user.lualine"
+require"user.nvim-tree"
+require"user.dap"
+require"user.comment"
+require"user.project-nvim"
 
-require"keymaps"
-require"plugins"
-require"lsp-wrapper"
-require"autocommands"
-
-vim.g.tokyonight_style = "night"
-vim.api.nvim_command [[colorscheme tokyonight]]
---vim.api.nvim_command [[colorscheme blue-moon]]
 --[[
 
 vim.api.nvim_create_autocmd("BufEnter", {

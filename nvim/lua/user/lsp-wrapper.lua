@@ -1,8 +1,8 @@
-require'lsp/python-ls'
-require'lsp/lua-ls'
-require"lsp/bash-ls"
-require"lsp/c-ls"
-require"lsp/rust-ls"
+require'user.lsp.python-ls'
+require'user.lsp.lua-ls'
+require"user.lsp.bash-ls"
+require"user.lsp.c-ls"
+require"user.lsp.rust-ls"
 
 
 -- Add additional capabilities supported by nvim-cmp
@@ -24,6 +24,7 @@ end
 
 -- luasnip setup
 local luasnip = require 'luasnip'
+require"luasnip.loaders.from_vscode".lazy_load()
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
@@ -65,6 +66,5 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'path' },
     { name = 'buffer' },
-    { name = 'cmdline' },
   },
 }

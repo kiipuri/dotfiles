@@ -41,3 +41,12 @@ keymap("n", "<C-q>", "<Cmd>lua require'dapui'.close()<CR>|<Cmd>BufferClose<CR>",
 
 -- Floaterm
 vim.g.floaterm_keymap_toggle = "<Leader>t"
+
+-- Add directory as project
+function _ADD_CURR_DIR_TO_PROJECTS()
+  local historyfile = require("project_nvim.utils.path").historyfile
+  local curr_directory = vim.fn.expand("%:p:h")
+  vim.cmd("!echo " .. curr_directory .. " >> " .. historyfile)
+end
+
+vim.cmd("command! ProjectAddManually lua _ADD_CURR_DIR_TO_PROJECTS()")

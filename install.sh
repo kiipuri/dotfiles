@@ -1,19 +1,5 @@
 #!/bin/sh
 
-# make, fakeroot
-
-cd dwm && sudo make install
-cd ../dmenu && sudo make install
-cd ..
-
-cp -rp home/* ~/
-cp -rp nvim ~/.config/nvim/
-cp -rp picom ~/.config/picom/
-
-sudo mkdir --parents /usr/local/share/fonts/dotfiles/
-sudo cp -rp fonts/* /usr/local/share/fonts/dotfiles/
-fc-cache
-
 sudo sed -i "/^#Color/ cColor" /etc/pacman.conf
 sudo pacman -Syu --noconfirm
 
@@ -25,6 +11,18 @@ cd ..
 rm -rf yay-git
 
 yay -S --noconfirm - < packages.txt
+
+cd dwm && sudo make install
+cd ../dmenu && sudo make install
+cd ..
+
+cp -rpT home/ ~/
+cp -rp nvim ~/.config/
+cp -rp picom ~/.config/
+
+sudo mkdir --parents /usr/local/share/fonts/dotfiles/
+sudo cp -rp fonts/* /usr/local/share/fonts/dotfiles/
+fc-cache
 
 chsh -s /bin/zsh
 

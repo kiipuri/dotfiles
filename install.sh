@@ -17,6 +17,7 @@ cd ../dmenu && sudo make install
 cd ..
 
 cp -rpT home/ ~/
+cp -rp scripts/ ~/ 
 cp -rp nvim ~/.config/
 cp -rp picom ~/.config/
 
@@ -36,6 +37,7 @@ sudo sed -i 's/^webkit_theme\s*=\s*\(.*\)/webkit_theme = glorious #\1/g' /etc/li
 sudo sed -i 's/^debug_mode\s*=\s*\(.*\)/debug_mode = true #\1/g' /etc/lightdm/lightdm-webkit2-greeter.conf
 
 # Install neovim plugins
+nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"
 nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"
 
 # Copy xsession Lightdm entry

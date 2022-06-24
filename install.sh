@@ -4,19 +4,16 @@ cd dwm && sudo make install
 cd ../dmenu && sudo make install
 cd ..
 
-cp -rp scripts ~/
-cp -p .Xresources ~/
-cp -p .xinitrc ~/
-cp -rp dwmblocks/blocks ~/scripts/
+cp -rp home/* ~/
 cp -rp nvim ~/.config/nvim/
+cp -rp picom ~/.config/picom/
 
-sudo mkdir --parents /usr/local/share/fonts/dotfiles
-sudo cp -rp fonts/* /usr/local/share/fonts/dotfiles
+sudo mkdir --parents /usr/local/share/fonts/dotfiles/
+sudo cp -rp fonts/* /usr/local/share/fonts/dotfiles/
 fc-cache
 
 sudo sed -i "/^#Color/ cColor" /etc/pacman.conf
 sudo pacman -Syu --noconfirm
-sudo pacman -S --noconfirm - < packages.txt
 
 git clone https://aur.archlinux.org/yay-git.git
 cd yay-git
@@ -25,11 +22,6 @@ makepkg -si --noconfirm
 cd ..
 rm -rf yay-git
 
-yay -S --noconfirm aur/oh-my-zsh-git
-cp /usr/share/oh-my-zsh/zshrc ~/.zshrc
-
-yay -S --noconfirm zsh-theme-powerlevel10k
-echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
-echo -e "\nbindkey -v" >> ~/.zshrc
+yay -S --noconfirm - < packages.txt
 
 chsh -s /bin/zsh

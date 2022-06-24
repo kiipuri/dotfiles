@@ -39,4 +39,7 @@ sudo sed -i 's/^debug_mode\s*=\s*\(.*\)/debug_mode = true #\1/g' /etc/lightdm/li
 nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"
 
 # Copy xsession Lightdm entry
-cp -rp xsession.desktop /usr/share/xsessions/
+cp ~/.xinitrc ~/.xsession
+sudo chmod +x ~/.xsession
+sudo mkdir /usr/share/xsessions/
+sudo cp -rp xsession.desktop /usr/share/xsessions/

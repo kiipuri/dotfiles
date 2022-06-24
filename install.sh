@@ -6,9 +6,9 @@ cd ..
 
 cp -rp scripts ~/
 cp -p .Xresources ~/
-cp -p .vimrc ~/
 cp -p .xinitrc ~/
 cp -rp dwmblocks/blocks ~/scripts/
+cp -rp nvim ~/.config/nvim/
 
 sudo mkdir --parents /usr/local/share/fonts/dotfiles
 sudo cp -rp fonts/* /usr/local/share/fonts/dotfiles
@@ -25,13 +25,10 @@ makepkg -si --noconfirm
 cd ..
 rm -rf yay-git
 
-yay -S aur/vundle --noconfirm
-vim +PluginInstall +qall
-
 yay -S --noconfirm aur/oh-my-zsh-git
 cp /usr/share/oh-my-zsh/zshrc ~/.zshrc
 
-yay -S --noconfirm zsh-theme-powerlevel10k-git
+yay -S --noconfirm zsh-theme-powerlevel10k
 echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
 echo -e "\nbindkey -v" >> ~/.zshrc
 

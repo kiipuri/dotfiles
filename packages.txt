@@ -6,3 +6,16 @@ zsh
 pacman-contrib
 libnotify
 dunst
+neovim
+lua-language-server
+bash-language-server
+clang
+pyright
+nerd-fonts-meslo
+pulsemixer
+rust-analyzer
+lightdm
+lightdm-webkit2-greeter
+lightdm-webkit2-theme-glorious
+zsh-theme-powerlevel10k
+oh-my-zsh-git

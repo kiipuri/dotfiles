@@ -21,3 +21,4 @@ zsh-theme-powerlevel10k
 oh-my-zsh-git
 copyq
 nitrogen
+nvim-packer-git

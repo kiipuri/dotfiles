@@ -30,7 +30,8 @@ static const Rule rules[] = {
     { "discord",  NULL,       NULL,   1,          0,           0,           1,          1 },
     { "qbittorrent", NULL,    NULL,   1 << 8,     0,           0,           1,          1 },
     { "URxvt",    NULL,       NULL,   0,          0,           1,           0,         -1 },
-    { NULL,       NULL,      "Event Tester", 0,   0,           0,           1,         -1 }, /* xev     */
+    { NULL,       NULL,      "Event Tester", 0,   0,           0,           1,         -1 }, /* xev      */
+    { "Chromium", NULL,       NULL,   0,          0,           0,           1,         -1 }, /* selenium */
 };
 
 /* layout(s) */
@@ -59,7 +60,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "./scripts/dmenu_recent_aliases.sh", "-c", "-l", "10", "-m", dmenumon, "-fn", dmenufont, "-nb", darkgray, "-nf", white, "-sb", green, "-sf", white, NULL };
+static const char *dmenucmd[] = { "./scripts/dmenu_recent_aliases.sh", "-c", "-l", "10", "-m", dmenumon, NULL };
 static const char *termcmd[]  = { "urxvt", NULL };
 static const char scratchpadname[] = "pulsemixer";
 static const char *scratchpadcmd[] = { "urxvt", "-geometry", "50x18", "-e", "pulsemixer", NULL };

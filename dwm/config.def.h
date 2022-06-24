@@ -30,7 +30,8 @@ static const Rule rules[] = {
     { "discord",  NULL,       NULL,   1,          0,           0,           1,          1 },
     { "qbittorrent", NULL,    NULL,   1 << 8,     0,           0,           1,          1 },
     { "URxvt",    NULL,       NULL,   0,          0,           1,           0,         -1 },
-    { NULL,       NULL,      "Event Tester", 0,   0,           0,           1,         -1 }, /* xev     */
+    { NULL,       NULL,      "Event Tester", 0,   0,           0,           1,         -1 }, /* xev      */
+    { "Chromium", NULL,       NULL,   0,          0,           0,           1,         -1 }, /* selenium */
 };
 
 /* layout(s) */

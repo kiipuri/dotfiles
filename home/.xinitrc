@@ -3,4 +3,5 @@ setxkbmap -option caps:escape
 dunst &
 xrdb .Xresources
 nitrogen --restore &
+dwmblocks &
 exec dwm

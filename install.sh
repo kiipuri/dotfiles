@@ -12,14 +12,11 @@ rm -rf yay-git
 
 yay -S --noconfirm - < packages.txt
 
-cd dwm && sudo make install
-cd ../dmenu && sudo make install
-cd ..
+cd dwm && sudo make clean install
+cd ../dmenu && sudo make clean install
+cd ../dwmblocks && sudo make clean install
 
 cp -rpT home/ ~/
-cp -rp scripts/ ~/ 
-cp -rp nvim ~/.config/
-cp -rp picom ~/.config/
 
 sudo mkdir --parents /usr/local/share/fonts/dotfiles/
 sudo cp -rp fonts/* /usr/local/share/fonts/dotfiles/

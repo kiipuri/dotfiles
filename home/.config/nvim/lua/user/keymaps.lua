@@ -31,7 +31,7 @@ keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 keymap("n", "<Leader>n", "<Cmd>NvimTreeToggle<CR>", opts)
 
 -- Telescope
-keymap("n", "<Leader>ff", "<Cmd>Telescope find_files<CR>", opts)
+keymap("n", "<Leader>ff", "<Cmd>Telescope find_files hidden=true<CR>", opts)
 keymap("n", "<leader>fp", "<Cmd>Telescope projects<CR>", opts)
 
 -- Barbar

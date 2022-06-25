@@ -1,7 +1,7 @@
 require"user.options"
 require"user.keymaps"
-require"user.plugins"
 require"user.alpha"
+require"user.plugins"
 require"user.lsp-wrapper"
 require"user.autocommands"
 require"user.trouble"
@@ -12,14 +12,6 @@ require"user.nvim-tree"
 require"user.dap"
 require"user.comment"
 require"user.project-nvim"
-
-local status_ok = pcall(require, "tokyonight")
-if not status_ok then
-   return
-end
-
-vim.g.tokyonight_style = "night"
-vim.api.nvim_command [[colorscheme tokyonight]]
 
 --[[
 

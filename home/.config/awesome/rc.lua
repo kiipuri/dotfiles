@@ -2,6 +2,7 @@
 ---@diagnostic disable:lowercase-global
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
+local scratch = require("scratch")
 pcall(require, "luarocks.loader")
 
 -- Standard awesome library
@@ -19,6 +20,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
+local dpi = require"beautiful.xresources".apply_dpi
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -62,7 +64,7 @@ editor_cmd = terminal .. " -e " .. editor
 -- If you do not like this or do not have such a key,
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod1"
+modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
@@ -174,7 +176,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+    awful.tag({ " 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 " }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -200,8 +202,9 @@ awful.screen.connect_for_each_screen(function(s)
         buttons = tasklist_buttons,
     }
 
-    --[[ s.mywibox = awful.wibar({ position = "bottom", screen = s, margins = { top = 20, left = 20, right = 20 }, height = 40,
-        bg = "#1A1B26"
+    s.mywibox = awful.wibar({ position = "top", screen = s, margins = { top = 20, left = 20, right = 20 },
+        height = dpi(40),
+        bg = "#1A1B26",
     })
 
     local LD = wibox.widget {
@@ -219,12 +222,22 @@ awful.screen.connect_for_each_screen(function(s)
         widget = wibox.widget.textbox
     }
 
+
+    local netuse_widget = awful.widget.watch("bash -c 'cd ~/scripts/blocks && ./netuse.sh'", 1, function(widget, stdout)
+        widget:set_markup("<span foreground='" .. beautiful.foreground_blue .."' background='" .. beautiful.bg_widget .. "'><span font='JetBrainsMono Nerd Font Regular 13'> </span>" .. stdout .. "</span>")
+    end)
+
+    -- local updates_widget = awful.widget.watch("bash -c 'checkupdates | wc -l'", 600, function(widget, stdout)
+    local updates_widget = awful.widget.watch("bash -c 'cat /tmp/updates'", 600, function(widget, stdout)
+        widget:set_markup("<span foreground='" .. beautiful.foreground_green .."' background='" .. beautiful.bg_widget .. "'> " .. stdout .. "</span>")
+    end)
+
     local wid = awful.widget.watch("bash -c 'date +\"%A, %d.%m.%Y\"'", 10, function(widget, stdout)
-        widget:set_markup("<span background='" .. beautiful.bg_widget .. "'>" .. stdout .. "</span>")
+        widget:set_markup("<span foreground='" .. beautiful.foreground_pink .."' background='" .. beautiful.bg_widget .. "'> " .. stdout .. "</span>")
     end)
 
     local time_widget = awful.widget.watch("bash -c 'date +\"%H:%M\"'", 1, function(widget, stdout)
-        widget:set_markup("<span background='" .. beautiful.bg_widget .. "'>" .. stdout .. "</span>")
+        widget:set_markup("<span foreground='" .. beautiful.foreground_blue .."' background='" .. beautiful.bg_widget .. "'> " .. stdout .. "</span>")
     end)
 
     -- Add widgets to the wibox
@@ -233,7 +246,9 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
             mylauncher,
+            spacing,
             s.mytaglist,
+            s.mylayoutbox,
             s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
@@ -241,6 +256,15 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             -- spacing = 20,
             wibox.widget.systray(),
+            spacing,
+            LD,
+            netuse_widget,
+            RD,
+            spacing,
+            LD,
+            updates_widget,
+            RD,
+            spacing,
             LD,
             wid,
             RD,
@@ -248,9 +272,9 @@ awful.screen.connect_for_each_screen(function(s)
             LD,
             time_widget,
             RD,
-            s.mylayoutbox,
+            spacing,
         },
-    } ]]
+    }
 end)
 -- }}}
 
@@ -293,9 +317,11 @@ globalkeys = gears.table.join(
               {description = "swap with next client by index", group = "client"}),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
               {description = "swap with previous client by index", group = "client"}),
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
+    -- awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
+    awful.key({ modkey }, ".", function () awful.screen.focus_relative( 1) end,
               {description = "focus the next screen", group = "screen"}),
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
+    -- awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
+    awful.key({ modkey }, ",", function () awful.screen.focus_relative(-1) end,
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
@@ -360,8 +386,12 @@ globalkeys = gears.table.join(
               end,
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+    --[[ awful.key({ modkey }, "p", function() menubar.show() end,
+              {description = "show the menubar", group = "launcher"}) ]]
+
+    -- awful.key({ modkey }, "p", function() awful.util.spawn_with_shell("~/scripts/dmenu_recent_aliases.sh") end),
+    awful.key({ modkey }, "p", function() awful.spawn("rofi -show run") end),
+    awful.key({ modkey }, "y", function() scratch.toggle("urxvt -name scratch-term -e pulsemixer", { instance = "scratch-term" }) end)
 )
 
 clientkeys = gears.table.join(
@@ -488,12 +518,16 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
-                     placement = awful.placement.no_overlap+awful.placement.no_offscreen
+                     placement = awful.placement.no_overlap+awful.placement.no_offscreen,
+                     maximized_horizontal = false,
+                     maximized_vertical = false,
+                     maximized = false,
      }
     },
-    { rule_any = { class = { "Polybar" } },
+    { rule = { instance = "scratch" },
         properties = {
-            border_width = 0
+            floating = true,
+            placement = awful.placement.centered
         }
     },
 
@@ -503,6 +537,7 @@ awful.rules.rules = {
           "DTA",  -- Firefox addon DownThemAll.
           "copyq",  -- Includes session name in class.
           "pinentry",
+          "scratch"
         },
         class = {
           "Arandr",

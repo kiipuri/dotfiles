@@ -15,6 +15,7 @@ yay -S --noconfirm - < packages.txt
 cd dwm && sudo make clean install
 cd ../dmenu && sudo make clean install
 cd ../dwmblocks && sudo make clean install
+cd ..
 
 cp -rpT home/ ~/
 

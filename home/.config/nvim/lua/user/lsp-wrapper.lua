@@ -1,9 +1,27 @@
-require'user.lsp.python-ls'
-require'user.lsp.lua-ls'
-require"user.lsp.bash-ls"
-require"user.lsp.c-ls"
-require"user.lsp.rust-ls"
+local python_status_ok = pcall(require, "user.lsp.python-ls")
+if not python_status_ok then
+    return
+end
 
+local bash_status_ok = pcall(require, "user.lsp.bash-ls")
+if not bash_status_ok then
+    return
+end
+
+local lua_status_ok = pcall(require, "user.lsp.lua-ls")
+if not lua_status_ok then
+    return
+end
+
+local c_status_ok = pcall(require, "user.lsp.c-ls")
+if not c_status_ok then
+    return
+end
+
+local rust_status_ok = pcall(require, "user.lsp.rust-ls")
+if not rust_status_ok then
+    return
+end
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()

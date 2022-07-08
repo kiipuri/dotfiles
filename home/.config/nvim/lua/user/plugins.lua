@@ -65,6 +65,8 @@ packer.startup(function(use)
     use "RRethy/vim-illuminate"
     use "goolord/alpha-nvim"
     use "rafamadriz/friendly-snippets"
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+    use "lambdalisue/suda.vim"
 
     if PACKER_BOOTSTRAP then
        packer.sync()

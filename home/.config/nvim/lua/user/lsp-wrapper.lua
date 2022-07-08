@@ -3,31 +3,43 @@ if not python_status_ok then
     return
 end
 
-local bash_status_ok = pcall(require, "user.lsp.bash-ls")
-if not bash_status_ok then
-    return
-end
 
 local lua_status_ok = pcall(require, "user.lsp.lua-ls")
 if not lua_status_ok then
     return
 end
 
+
+local bash_status_ok = pcall(require, "user.lsp.bash-ls")
+if not bash_status_ok then
+    return
+end
+
+
 local c_status_ok = pcall(require, "user.lsp.c-ls")
 if not c_status_ok then
     return
 end
+
 
 local rust_status_ok = pcall(require, "user.lsp.rust-ls")
 if not rust_status_ok then
     return
 end
 
+
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+local cmp_status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not cmp_status_ok then
+    return
+end
+capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
-local lspconfig = require('lspconfig')
+local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
+if not lspconfig_status_ok then
+    return
+end
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver' }

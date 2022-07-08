@@ -50,3 +50,6 @@ function _ADD_CURR_DIR_TO_PROJECTS()
 end
 
 vim.cmd("command! ProjectAddManually lua _ADD_CURR_DIR_TO_PROJECTS()")
+
+-- Delete without yanking
+vim.api.nvim_set_keymap("n", "<leader>diw", "\"_diw", opts)

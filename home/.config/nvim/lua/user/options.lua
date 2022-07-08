@@ -10,3 +10,6 @@ vim.opt.clipboard = "unnamedplus"
 
 vim.g.tokyonight_style = "night"
 vim.api.nvim_command [[colorscheme tokyonight]]
+
+vim.g.floaterm_width = 0.7
+vim.g.floaterm_height = 0.7

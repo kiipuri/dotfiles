@@ -17,8 +17,7 @@ rust-analyzer
 lightdm
 lightdm-webkit2-greeter
 lightdm-webkit2-theme-glorious
-zsh-theme-powerlevel10k
-oh-my-zsh-git
 copyq
 nitrogen
 nvim-packer-git
+kitty

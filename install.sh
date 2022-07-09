@@ -36,10 +36,12 @@ sudo sed -i 's/^debug_mode\s*=\s*\(.*\)/debug_mode = true #\1/g' /etc/lightdm/li
 
 # Install neovim plugins
 nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"
-nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"
 
 # Copy xsession Lightdm entry
 cp ~/.xinitrc ~/.xsession
 sudo chmod +x ~/.xsession
 sudo mkdir /usr/share/xsessions/
 sudo cp -rp xsession.desktop /usr/share/xsessions/
+
+# export ZDOTDIR environment variable
+echo "export ZDOTDIR=$HOME/.config/zsh" > /etc/zsh/zshenv

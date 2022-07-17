@@ -5,13 +5,18 @@
     foreground:                     #CACCFA;
     background-color:               #1A1B26;
     text-color:                     @foreground;
+
 }
 
 configuration {
     run {
-        display-name:   "Run a program: ";
-        text-color:     #1DD6FF;
+        display-name:               "Run a program: ";
+        text-color:                 #1DD6FF;
     }
+    kb-remove-to-eol:               "";
+    kb-accept-entry:                "Return";
+    kb-row-up:                      "Up,Control+k";
+    kb-row-down:                    "Down,Control+j";
 }
 
 prompt {
@@ -30,4 +35,5 @@ window {
 
 element-text selected {
     background-color:   #1DD6FF;
+    text-color:         #1A1B26;
 }

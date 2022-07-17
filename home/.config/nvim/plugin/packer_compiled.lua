@@ -119,10 +119,20 @@ _G.packer_plugins = {
     path = "/home/kiipuri/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["dressing.nvim"] = {
+    loaded = true,
+    path = "/home/kiipuri/.local/share/nvim/site/pack/packer/start/dressing.nvim",
+    url = "https://github.com/stevearc/dressing.nvim"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/home/kiipuri/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
+  },
+  ["lspsaga.nvim"] = {
+    loaded = true,
+    path = "/home/kiipuri/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
+    url = "https://github.com/glepnir/lspsaga.nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,
@@ -159,6 +169,11 @@ _G.packer_plugins = {
     path = "/home/kiipuri/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
+  ["nvim-notify"] = {
+    loaded = true,
+    path = "/home/kiipuri/.local/share/nvim/site/pack/packer/start/nvim-notify",
+    url = "https://github.com/rcarriga/nvim-notify"
+  },
   ["nvim-tree.lua"] = {
     loaded = true,
     path = "/home/kiipuri/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
@@ -189,10 +204,35 @@ _G.packer_plugins = {
     path = "/home/kiipuri/.local/share/nvim/site/pack/packer/start/project.nvim",
     url = "https://github.com/ahmedkhalf/project.nvim"
   },
+  ["quick-scope"] = {
+    loaded = true,
+    path = "/home/kiipuri/.local/share/nvim/site/pack/packer/start/quick-scope",
+    url = "https://github.com/unblevable/quick-scope"
+  },
+  ["rust-tools.nvim"] = {
+    loaded = true,
+    path = "/home/kiipuri/.local/share/nvim/site/pack/packer/start/rust-tools.nvim",
+    url = "https://github.com/simrat39/rust-tools.nvim"
+  },
+  sniprun = {
+    loaded = true,
+    path = "/home/kiipuri/.local/share/nvim/site/pack/packer/start/sniprun",
+    url = "https://github.com/michaelb/sniprun"
+  },
+  ["split-term.vim"] = {
+    loaded = true,
+    path = "/home/kiipuri/.local/share/nvim/site/pack/packer/start/split-term.vim",
+    url = "https://github.com/vimlab/split-term.vim"
+  },
   ["suda.vim"] = {
     loaded = true,
     path = "/home/kiipuri/.local/share/nvim/site/pack/packer/start/suda.vim",
     url = "https://github.com/lambdalisue/suda.vim"
+  },
+  ["tabout.nvim"] = {
+    loaded = true,
+    path = "/home/kiipuri/.local/share/nvim/site/pack/packer/start/tabout.nvim",
+    url = "https://github.com/abecodes/tabout.nvim"
   },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
@@ -233,6 +273,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/kiipuri/.local/share/nvim/site/pack/packer/start/vim-illuminate",
     url = "https://github.com/RRethy/vim-illuminate"
+  },
+  ["vim-surround"] = {
+    loaded = true,
+    path = "/home/kiipuri/.local/share/nvim/site/pack/packer/start/vim-surround",
+    url = "https://github.com/tpope/vim-surround"
+  },
+  ["which-key.nvim"] = {
+    loaded = true,
+    path = "/home/kiipuri/.local/share/nvim/site/pack/packer/start/which-key.nvim",
+    url = "https://github.com/folke/which-key.nvim"
   }
 }
 

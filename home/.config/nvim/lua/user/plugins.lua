@@ -52,8 +52,8 @@ packer.startup(function(use)
     use "voldikss/vim-floaterm"
     use "norcalli/nvim-colorizer.lua"
     use {
-      'nvim-telescope/telescope.nvim',
-      requires = 'nvim-lua/plenary.nvim'
+        'nvim-telescope/telescope.nvim',
+        requires = 'nvim-lua/plenary.nvim'
     }
     use "jiangmiao/auto-pairs"
     use "romgrk/barbar.nvim"
@@ -65,10 +65,21 @@ packer.startup(function(use)
     use "RRethy/vim-illuminate"
     use "goolord/alpha-nvim"
     use "rafamadriz/friendly-snippets"
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+    use { 'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
     use "lambdalisue/suda.vim"
+    use "folke/which-key.nvim"
+    use "glepnir/lspsaga.nvim"
+    use "simrat39/rust-tools.nvim"
+    use "tpope/vim-surround"
+    use "unblevable/quick-scope"
+    use "abecodes/tabout.nvim"
+    use { "michaelb/sniprun", run = "bash ./install.sh" }
+    use "rcarriga/nvim-notify"
+    use "stevearc/dressing.nvim"
+    use "vimlab/split-term.vim"
 
     if PACKER_BOOTSTRAP then
-       packer.sync()
+        packer.sync()
     end
 end)

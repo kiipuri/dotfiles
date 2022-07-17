@@ -26,6 +26,7 @@ keymap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", opts)
 keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
 keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
 keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
+keymap("n", "<leader>de", "<cmd>lua require'dapui'.eval()<cr>", opts)
 
 -- NvimTree
 keymap("n", "<Leader>n", "<Cmd>NvimTreeToggle<CR>", opts)
@@ -44,12 +45,19 @@ vim.g.floaterm_keymap_toggle = "<Leader>t"
 
 -- Add directory as project
 function _ADD_CURR_DIR_TO_PROJECTS()
-  local historyfile = require("project_nvim.utils.path").historyfile
-  local curr_directory = vim.fn.expand("%:p:h")
-  vim.cmd("!echo " .. curr_directory .. " >> " .. historyfile)
+    local historyfile = require("project_nvim.utils.path").historyfile
+    local curr_directory = vim.fn.expand("%:p:h")
+    vim.cmd("!echo " .. curr_directory .. " >> " .. historyfile)
 end
 
 vim.cmd("command! ProjectAddManually lua _ADD_CURR_DIR_TO_PROJECTS()")
 
 -- Delete without yanking
 vim.api.nvim_set_keymap("n", "<leader>diw", "\"_diw", opts)
+
+-- Lspsaga
+-- keymap("n", "<leader>r", "<cmd>Lspsaga rename<cr>", opts)
+keymap("n", "<leader>s", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
+
+-- Refactor
+keymap("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)

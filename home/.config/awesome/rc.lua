@@ -55,7 +55,7 @@ end
 beautiful.init("/home/kiipuri/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "kitty"
+terminal = "env GLFW_IM_MODULE=ibus kitty"
 editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -390,7 +390,8 @@ globalkeys = gears.table.join(
               {description = "show the menubar", group = "launcher"}) ]]
 
     -- awful.key({ modkey }, "p", function() awful.util.spawn_with_shell("~/scripts/dmenu_recent_aliases.sh") end),
-    awful.key({ modkey }, "p", function() awful.spawn("rofi -show run") end),
+    -- awful.key({ modkey }, "p", function() awful.spawn("rofi -show run") end),
+    awful.key({ modkey }, "p", function() awful.spawn("rofi -run-list-command '. ~/scripts/aliases.sh' -run-command '/bin/zsh -i -c \'{cmd}\'' -show run") end),
     awful.key({ modkey }, "y", function() scratch.toggle("urxvt -name scratch-term -e pulsemixer", { instance = "scratch-term" }) end)
 )
 

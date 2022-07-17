@@ -1,8 +1,8 @@
 setopt autocd globdots
 
 # Completion
-autoload -Uz compinit
 zstyle ":completion:*" menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 eval "$(dircolors)"
 zstyle ":completion:*" list-colors ${(s.:.)LS_COLORS}
 zmodload zsh/complist
@@ -10,6 +10,7 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
+autoload -Uz compinit
 compinit
 
 export EDITOR="nvim"
@@ -22,6 +23,7 @@ export XDG_STATE_HOME=$HOME/.local/state
 export XDG_CACHE_HOME=$HOME/.cache
 export CARGO_HOME=$XDG_DATA_HOME/cargo
 export HISTFILE=$XDG_CONFIG_HOME/zsh/history
+export SAVEHIST=10000
 
 # Script for lf to cd to current directory when quit
 LFCD="/home/kiipuri/.config/lf/lfcd.sh"

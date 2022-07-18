@@ -41,6 +41,7 @@ cmd mkfile ${{
   $EDITOR $ans
 }}
 
+map m
 map au unarchive
 map x trash
 map <enter> shell

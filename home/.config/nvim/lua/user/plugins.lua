@@ -56,7 +56,7 @@ packer.startup(function(use)
         requires = 'nvim-lua/plenary.nvim'
     }
     use "jiangmiao/auto-pairs"
-    use "romgrk/barbar.nvim"
+    -- use "romgrk/barbar.nvim"
     use "mfussenegger/nvim-dap"
     use "mfussenegger/nvim-dap-python"
     use "rcarriga/nvim-dap-ui"
@@ -78,6 +78,7 @@ packer.startup(function(use)
     use "rcarriga/nvim-notify"
     use "stevearc/dressing.nvim"
     use "vimlab/split-term.vim"
+    use "moll/vim-bbye"
 
     if PACKER_BOOTSTRAP then
         packer.sync()

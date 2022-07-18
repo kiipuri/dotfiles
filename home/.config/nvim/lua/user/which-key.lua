@@ -6,26 +6,30 @@ end
 which_key.register({
     f = {
         name = "File",
-        f = "Find file",
-        p = "Open projects"
+        f = { "<Cmd>Telescope find_files hidden=true<CR>", "Find file" },
+        p = { "<Cmd>Telescope projects<CR>", "Open projects" }
     },
     d = {
         name = "Dap",
-        b = "Toggle breakpoint",
-        c = "Continue",
-        i = "Step into",
-        l = "Run last",
-        O = "Step out",
-        o = "Step over",
-        r = "Toggle REPL",
-        t = "Terminate",
-        u = "Toggle UI",
-        e = "Evaluate word"
+        b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle breakpoint" },
+        c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
+        i = { "<cmd>lua require'dap'.step_into()<cr>", "Step into" },
+        l = { "<cmd>lua require'dap'.run_last()<cr>", "Run last" },
+        O = { "<cmd>lua require'dap'.step_out()<cr>", "Step out" },
+        o = { "<cmd>lua require'dap'.step_over()<cr>", "Step over" },
+        r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle REPL" },
+        t = { "<cmd>lua require'dap'.terminate()<cr>", "Terminate" },
+        u = { "<cmd>lua require'dapui'.toggle()<cr>", "Toggle UI" },
+        e = { "<cmd>lua require'dapui'.eval()<cr>", "Evaluate word" }
     },
-    r = "Refactor",
-    s = "Show line diagnostics",
+    r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Refactor" },
+    s = { "<cmd>Lspsaga show_line_diagnostics<cr>", "Show line diagnostics" },
     t = "Toggle floating terminal",
-    n = "Toggle NvimTree",
+    n = { "<cmd>NvimTreeToggle<cr>", "Toggle NvimTree" },
+    b = { "<cmd>lua require'telescope.builtin'.buffers(require'telescope.themes'.get_dropdown{previewer = false, initial_mode='normal'})<cr>",
+        "Find buffers" },
+    c = { "<cmd>Bdelete<cr>", "Close buffer" },
+
 }, { prefix = "<leader>" })
 
 which_key.register({

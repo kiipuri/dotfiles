@@ -41,6 +41,16 @@ cmd mkfile ${{
   $EDITOR $ans
 }}
 
+cmd z %{{
+    result="$(zoxide query --exclude "${PWD}" -- "$1")"
+    lf -remote "send ${id} cd '${result}'"
+}}
+
+cmd zi ${{
+    result="$(zoxide query -i -- "$1")"
+    lf -remote "send ${id} cd '${result}'"
+}}
+
 map m
 map au unarchive
 map x trash

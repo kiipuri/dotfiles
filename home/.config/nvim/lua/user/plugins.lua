@@ -49,7 +49,7 @@ packer.startup(function(use)
     use "tree-sitter/tree-sitter-python"
     use "tree-sitter/tree-sitter-c"
     use "nvim-treesitter/nvim-treesitter"
-    use "voldikss/vim-floaterm"
+    -- use "voldikss/vim-floaterm"
     use "norcalli/nvim-colorizer.lua"
     use {
         'nvim-telescope/telescope.nvim',
@@ -79,6 +79,8 @@ packer.startup(function(use)
     use "stevearc/dressing.nvim"
     use "vimlab/split-term.vim"
     use "moll/vim-bbye"
+    use { "glacambre/firenvim", run = function() vim.fn['firenvim#install'](0) end }
+    use "akinsho/toggleterm.nvim"
 
     if PACKER_BOOTSTRAP then
         packer.sync()

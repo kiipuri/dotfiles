@@ -13,9 +13,10 @@ telescope.setup {
     },
     pickers = {
         find_files = {
-            find_command = { "fd", "--strip-cwd-prefix", "--ignore-file", "~/.config/fd/ignore" }
+            find_command = { "fd", "--strip-cwd-prefix", "--ignore-file=$HOME/.config/fd/ignore", "--hidden" },
+            follow = true
         }
     }
 }
-telescope.load_extension"projects"
-telescope.load_extension"fzf"
+telescope.load_extension "projects"
+telescope.load_extension "fzf"

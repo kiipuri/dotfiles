@@ -18,4 +18,6 @@ require "user.rust-tools"
 require "user.sniprun"
 require "user.notify"
 require "user.dressing"
+require "user.telescope"
+require "user.toggleterm"
 -- require "user.tabout" -- cant get to work

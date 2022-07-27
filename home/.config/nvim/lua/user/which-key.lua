@@ -22,13 +22,24 @@ which_key.register({
         u = { "<cmd>lua require'dapui'.toggle()<cr>", "Toggle UI" },
         e = { "<cmd>lua require'dapui'.eval()<cr>", "Evaluate word" }
     },
-    r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Refactor" },
-    s = { "<cmd>Lspsaga show_line_diagnostics<cr>", "Show line diagnostics" },
-    t = "Toggle floating terminal",
+    t = {
+        name = "Terminal",
+        t = { "<cmd>ToggleTerm direction=float<cr>", "Toggle floating terminal" },
+        l = { "<cmd>ToggleTerm direction=vertical<cr>", "Toggle right terminal" },
+        c = "Cargo run",
+        g = "Lazygit",
+    },
     n = { "<cmd>NvimTreeToggle<cr>", "Toggle NvimTree" },
     b = { "<cmd>lua require'telescope.builtin'.buffers(require'telescope.themes'.get_dropdown{previewer = false, initial_mode='normal'})<cr>",
         "Find buffers" },
     c = { "<cmd>Bdelete<cr>", "Close buffer" },
+    l = { name = "Lsp",
+        d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
+        f = { "<cmd>lua vim.lsp.buf.references()<cr>", "References" },
+        r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Refactor" },
+        s = { "<cmd>Lspsaga show_line_diagnostics<cr>", "Show line diagnostics" },
+        c = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code actions" },
+    }
 
 }, { prefix = "<leader>" })
 

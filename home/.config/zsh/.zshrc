@@ -1,4 +1,6 @@
 setopt autocd globdots
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
 
 # Completion
 zstyle ":completion:*" menu select

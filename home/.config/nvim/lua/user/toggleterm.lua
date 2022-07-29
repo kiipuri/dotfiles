@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 toggleterm.setup {
-    size = 40,
+    size = 60,
     close_on_exit = true,
     direction = "float",
     float_opts = {

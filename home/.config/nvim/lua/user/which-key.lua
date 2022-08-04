@@ -41,7 +41,8 @@ which_key.register({
         s = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", "Show line diagnostics" },
         c = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code actions" },
         h = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
-    }
+    },
+    x = { "<cmd>VimtexCompile<cr>", "Compile LaTeX" }
 
 }, { prefix = "<leader>" })
 

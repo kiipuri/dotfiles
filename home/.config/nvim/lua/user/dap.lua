@@ -1,7 +1,7 @@
---[[ local dap_status_ok, dap = pcall(require, "dap")
+local dap_status_ok, dap = pcall(require, "dap")
 if not dap_status_ok then
     return
-end ]]
+end
 
 local dap_ui_status_ok, dapui = pcall(require, "dapui")
 if not dap_ui_status_ok then
@@ -32,4 +32,23 @@ dapui.setup {
         }
     }
 }
-dap_python.setup ("/usr/bin/python", {})
+
+dap_python.setup("/usr/bin/python", {})
+
+dap.adapters.lldb = {
+    type = "executable",
+    command = "lldb-vscode",
+    name = "lldb"
+}
+
+dap.configurations.rust = { {
+    name = "Launch",
+    type = "lldb",
+    request = "launch",
+    program = function()
+        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+    end,
+    cwd = "${workspaceFolder}",
+    stopOnEntry = false,
+    args = {},
+} }

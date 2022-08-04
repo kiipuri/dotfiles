@@ -81,6 +81,7 @@ cmp.setup {
             if cmp.visible() then
                 cmp.select_next_item()
             else
+                -- vim.fn.feedkeys(vim.api.nvim_replace_termcode("<Plug>(Tabout)", true, true, true), "")
                 fallback()
             end
 

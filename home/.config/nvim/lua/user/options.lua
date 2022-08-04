@@ -9,11 +9,16 @@ vim.opt.expandtab = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.timeoutlen = 200
 
-vim.g.tokyonight_style = "night"
-vim.api.nvim_command [[colorscheme tokyonight]]
+vim.g.vimtex_view_method = "zathura"
+vim.g.vimtex_general_viewer = "zathura"
+-- vim.opt.textwidth = 80
+-- vim.opt.fo:append('a')
 
-vim.g.floaterm_width = 0.7
-vim.g.floaterm_height = 0.7
+local status_ok, _ = pcall(vim.cmd, "colorscheme tokyonight")
+if status_ok then
+    vim.g.tokyonight_style = "night"
+    vim.api.nvim_command [[colorscheme tokyonight]]
+end
 
 vim.api.nvim_command [[
     let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']

@@ -73,7 +73,10 @@ packer.startup(function(use)
     use "simrat39/rust-tools.nvim"
     use "tpope/vim-surround"
     use "unblevable/quick-scope"
-    use "abecodes/tabout.nvim"
+    use {
+        "abecodes/tabout.nvim",
+        wants = { "nvim-treesitter" }
+    }
     use { "michaelb/sniprun", run = "bash ./install.sh" }
     use "rcarriga/nvim-notify"
     use "stevearc/dressing.nvim"
@@ -81,6 +84,7 @@ packer.startup(function(use)
     use "moll/vim-bbye"
     use { "glacambre/firenvim", run = function() vim.fn['firenvim#install'](0) end }
     use "akinsho/toggleterm.nvim"
+    use "lervag/vimtex"
 
     if PACKER_BOOTSTRAP then
         packer.sync()

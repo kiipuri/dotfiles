@@ -1,6 +1,7 @@
 setopt autocd globdots
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
+setopt hist_ignore_all_dups
 
 # Completion
 zstyle ":completion:*" menu select
@@ -26,6 +27,7 @@ export XDG_CACHE_HOME=$HOME/.cache
 export CARGO_HOME=$XDG_DATA_HOME/cargo
 export HISTFILE=$XDG_CONFIG_HOME/zsh/history
 export SAVEHIST=10000
+export HISTSIZE=$SAVEHIST
 
 # Script for lf to cd to current directory when quit
 LFCD="/home/kiipuri/.config/lf/lfcd.sh"
@@ -48,3 +50,5 @@ source $XDG_CONFIG_HOME/powerlevel10k/.p10k.zsh
 bindkey -v
 
 eval "$(zoxide init zsh)"
+
+alias history="history 1"

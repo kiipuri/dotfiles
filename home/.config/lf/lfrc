@@ -41,8 +41,15 @@ cmd mkfile ${{
   $EDITOR $ans
 }}
 
+cmd zip ${{
+    zip -r "$f".zip "$f"
+}}
+
 cmd z %{{
-    result="$(zoxide query --exclude "${PWD}" -- "$1")"
+    printf "Directory search string: "
+    read dir
+    #result="$(zoxide query --exclude "${PWD}" -- "$1")"
+    result="$(zoxide query $dir)"
     lf -remote "send ${id} cd '${result}'"
 }}
 
@@ -57,3 +64,6 @@ map x trash
 map <enter> shell
 map mf mkfile
 map md mkdir
+map az zip
+map zz z
+map zi zi

@@ -8,9 +8,12 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.timeoutlen = 200
+vim.api.nvim_command [[set scrolloff=10]]
 
 vim.g.vimtex_view_method = "zathura"
 vim.g.vimtex_general_viewer = "zathura"
+vim.cmd([[
+]])
 -- vim.opt.textwidth = 80
 -- vim.opt.fo:append('a')
 

@@ -27,11 +27,15 @@ if not rust_status_ok then
     return
 end
 
+local omni_status_ok = pcall(require, "user.lsp.omnisharp-ls")
+if not omni_status_ok then
+    return
+end
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-local cmp_status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not cmp_status_ok then
+local cmp_lsp_status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not cmp_lsp_status_ok then
     return
 end
 capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
@@ -60,7 +64,11 @@ local icons = require "user.icons"
 local kind_icons = icons.kind
 
 -- nvim-cmp setup
-local cmp = require 'cmp'
+local cmp_status_ok, cmp = pcall(require, "cmp");
+if not cmp_status_ok then
+    return
+end
+if cmp == nil then return end
 cmp.setup {
     snippet = {
         expand = function(args)
@@ -77,11 +85,17 @@ cmp.setup {
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
         },
+        -- ['<Esc>'] = cmp.mapping(function(fallback)
+        --     if cmp.visible() then
+        --         cmp.mapping.close()
+        --     else
+        --         fallback()
+        --     end
+        -- end, { "i" }),
         ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
             else
-                -- vim.fn.feedkeys(vim.api.nvim_replace_termcode("<Plug>(Tabout)", true, true, true), "")
                 fallback()
             end
 

@@ -37,12 +37,12 @@ which_key.register({
         d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
         f = { "<cmd>lua vim.lsp.buf.references()<cr>", "References" },
         r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Refactor" },
-        -- s = { "<cmd>Lspsaga show_line_diagnostics<cr>", "Show line diagnostics" },
         s = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", "Show line diagnostics" },
         c = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code actions" },
         h = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
     },
-    x = { "<cmd>VimtexCompile<cr>", "Compile LaTeX" }
+    x = { "<cmd>VimtexCompile<cr>", "Compile LaTeX" },
+    h = { "<cmd>noh<cr>", "Disable highlight" },
 
 }, { prefix = "<leader>" })
 

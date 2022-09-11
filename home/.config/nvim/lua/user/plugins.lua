@@ -11,7 +11,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
         "https://github.com/wbthomason/packer.nvim",
         install_path,
     }
-    print "Installing packer close and reopen Neovim..."
+    print "Installing packer, close and reopen neovim..."
     vim.cmd [[packadd packer.nvim]]
 end
 
@@ -49,14 +49,12 @@ packer.startup(function(use)
     use "tree-sitter/tree-sitter-python"
     use "tree-sitter/tree-sitter-c"
     use "nvim-treesitter/nvim-treesitter"
-    -- use "voldikss/vim-floaterm"
     use "norcalli/nvim-colorizer.lua"
     use {
         'nvim-telescope/telescope.nvim',
         requires = 'nvim-lua/plenary.nvim'
     }
     use "jiangmiao/auto-pairs"
-    -- use "romgrk/barbar.nvim"
     use "mfussenegger/nvim-dap"
     use "mfussenegger/nvim-dap-python"
     use "rcarriga/nvim-dap-ui"
@@ -85,6 +83,7 @@ packer.startup(function(use)
     use { "glacambre/firenvim", run = function() vim.fn['firenvim#install'](0) end }
     use "akinsho/toggleterm.nvim"
     use "lervag/vimtex"
+    use "karb94/neoscroll.nvim"
 
     if PACKER_BOOTSTRAP then
         packer.sync()

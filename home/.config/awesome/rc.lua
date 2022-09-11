@@ -1,4 +1,4 @@
----@diagnostic disable:undefined-global
+--@diagnostic disable:undefined-global
 ---@diagnostic disable:lowercase-global
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
@@ -257,6 +257,7 @@ awful.screen.connect_for_each_screen(function(s)
             spacing,
             s.mytaglist,
             s.mylayoutbox,
+            spacing,
             s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
@@ -288,9 +289,9 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
-    awful.button({}, 3, function() mymainmenu:toggle() end),
-    awful.button({}, 4, awful.tag.viewnext),
-    awful.button({}, 5, awful.tag.viewprev)
+    awful.button({}, 3, function() mymainmenu:toggle() end)
+-- awful.button({}, 4, awful.tag.viewnext)
+-- awful.button({}, 5, awful.tag.viewprev)
 ))
 -- }}}
 

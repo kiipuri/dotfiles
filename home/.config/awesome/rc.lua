@@ -584,7 +584,6 @@ awful.rules.rules = {
     { rule_any = { type = { "normal", "dialog" }
     }, properties = { titlebars_enabled = false }
     },
-
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
@@ -604,6 +603,12 @@ client.connect_signal("manage", function(c)
         and not c.size_hints.program_position then
         -- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
+    end
+end)
+
+client.connect_signal("property::instance", function(c)
+    if c.name == "Unlock Database - KeePassXC" then
+        c:move_to_tag(awful.screen.focused().selected_tag)
     end
 end)
 

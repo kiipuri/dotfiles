@@ -32,3 +32,5 @@ rofi
 cronie
 trash-cli
 sxhkd
+xclip
+ueberzug

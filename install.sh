@@ -17,12 +17,16 @@ paru -S --noconfirm - < packages.txt
 # cd ../dwmblocks && sudo make clean install
 # cd ..
 
-# cp -rpT home/ ~/
-
+mkdir $HOME/.config/
 cd config
 for d in *; do
     ln -sf $(pwd)/$d $HOME/.config/
 done
+
+cd ..
+
+cp autorun.sh ~/
+cp -r scripts ~/
 
 sudo mkdir --parents /usr/local/share/fonts/dotfiles/
 sudo cp -rp fonts/* /usr/local/share/fonts/dotfiles/
@@ -40,16 +44,11 @@ sudo systemctl enable lightdm
 # sudo sed -i 's/^debug_mode\s*=\s*\(.*\)/debug_mode = true #\1/g' /etc/lightdm/lightdm-webkit2-greeter.conf
 
 # Install neovim plugins
-nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"
-
-# Copy xsession Lightdm entry
-# cp ~/.xinitrc ~/.xsession
-# sudo chmod +x ~/.xsession
-# sudo mkdir /usr/share/xsessions/
-# sudo cp -rp xsession.desktop /usr/share/xsessions/
+nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync" > /dev/null 2>&1
+nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync" > /dev/null 2>&1
 
 # export ZDOTDIR environment variable
 echo "export ZDOTDIR=$HOME/.config/zsh" > /etc/zsh/zshenv
 
 sudo systemctl enable cronie
-(crontab -l 2>/dev/null; echo "*/10 * * * * '$(checkupdates | wc -l)' > $HOME/scripts/blocks/.updates") | crontab -
+(crontab -l 2>/dev/null; echo -e "*/10 * * * * echo \"\$(checkupdates | wc -l)\" > $HOME/scripts/blocks/.updates") | crontab -

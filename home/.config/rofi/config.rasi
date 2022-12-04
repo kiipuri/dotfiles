@@ -13,6 +13,9 @@ configuration {
         display-name:               "Run a program: ";
         text-color:                 #1DD6FF;
     }
+    calc {
+        display-name:               "Calc: ";
+    }
     kb-remove-to-eol:               "";
     kb-accept-entry:                "Return";
     kb-row-up:                      "Up,Control+k";

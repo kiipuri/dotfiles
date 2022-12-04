@@ -21,8 +21,9 @@ cmd open ${{
 cmd unarchive ${{
   case "$f" in
       *.zip) unzip "$f" ;;
-      *.tar.gz) tar -xzvf "$f" ;;
-      *.tar.bz2) tar -xjvf "$f" ;;
+      *.tar.gz) tar -xzf "$f" ;;
+      *.tar.bz2) tar -xjf "$f" ;;
+      *.tar.xz) tar -xf "$f" ;;
       *.tar) tar -xvf "$f" ;;
       *.rar) unrar e "$f" ;;
       *) echo "Unsupported format" ;;

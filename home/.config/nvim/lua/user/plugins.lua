@@ -54,7 +54,7 @@ packer.startup(function(use)
         'nvim-telescope/telescope.nvim',
         requires = 'nvim-lua/plenary.nvim'
     }
-    use "jiangmiao/auto-pairs"
+    use { "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup {} end }
     use "mfussenegger/nvim-dap"
     use "mfussenegger/nvim-dap-python"
     use "rcarriga/nvim-dap-ui"
@@ -80,10 +80,11 @@ packer.startup(function(use)
     use "stevearc/dressing.nvim"
     use "vimlab/split-term.vim"
     use "moll/vim-bbye"
-    use { "glacambre/firenvim", run = function() vim.fn['firenvim#install'](0) end }
     use "akinsho/toggleterm.nvim"
     use "lervag/vimtex"
     use "karb94/neoscroll.nvim"
+    -- use "wellle/context.vim"
+    use "ThePrimeagen/harpoon"
 
     if PACKER_BOOTSTRAP then
         packer.sync()

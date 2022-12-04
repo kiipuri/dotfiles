@@ -16,29 +16,10 @@ keymap("n", "<C-Down>", ":resize +2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
--- DAP
--- keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
--- keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts)
--- keymap("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", opts)
--- keymap("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", opts)
--- keymap("n", "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", opts)
--- keymap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", opts)
--- keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
--- keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
--- keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
--- keymap("n", "<leader>de", "<cmd>lua require'dapui'.eval()<cr>", opts)
-
--- NvimTree
--- keymap("n", "<Leader>n", "<Cmd>NvimTreeToggle<CR>", opts)
-
--- Telescope
--- keymap("n", "<Leader>ff", "<Cmd>Telescope find_files hidden=true<CR>", opts)
--- keymap("n", "<leader>fp", "<Cmd>Telescope projects<CR>", opts)
-
--- Barbar
--- keymap("n", "<Tab>", "<Cmd>BufferNext<CR>", opts)
--- keymap("n", "<S-Tab>", "<Cmd>BufferPrevious<CR>", opts)
--- keymap("n", "<C-q>", "<Cmd>lua require'dapui'.close()<CR>|<Cmd>BufferClose<CR>", opts)
+-- keymap("n", "K", ":m -2<cr>gv", opts)
+keymap("v", "K", ":m-2<cr>gv=gv", opts)
+-- keymap("n", "J", ":m +1<cr>gv", opts)
+keymap("v", "J", ":m'>+1<cr>gv=gv", opts)
 
 -- Floaterm
 vim.g.floaterm_keymap_toggle = "<Leader>t"
@@ -58,6 +39,3 @@ vim.api.nvim_set_keymap("n", "<leader>diw", "\"_diw", opts)
 -- Lspsaga
 -- keymap("n", "<leader>r", "<cmd>Lspsaga rename<cr>", opts)
 -- keymap("n", "<leader>s", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
-
--- Refactor
--- keymap("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)

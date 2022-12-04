@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     pattern = { "*.rs", "*.lua" },
     callback = function()
-        vim.lsp.buf.formatting_sync()
+        vim.lsp.buf.format()
     end
 })
 

@@ -43,7 +43,7 @@ function _CARGO_RUN()
     cargo_run:toggle()
 end
 
-vim.api.nvim_set_keymap("n", "<leader>tg", "<cmd>lua _LAZYGIT_TOGGLE()<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _LAZYGIT_TOGGLE()<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>tc", "<cmd>lua _CARGO_RUN()<cr>", { noremap = true, silent = true })
 
 vim.cmd "autocmd! TermOpen term://* lua set_terminal_keymaps()"

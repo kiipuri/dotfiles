@@ -12,6 +12,16 @@ vim.api.nvim_command [[set scrolloff=10]]
 
 vim.g.vimtex_view_method = "zathura"
 vim.g.vimtex_general_viewer = "zathura"
+-- vim.g.vimtex_compiler_method = "latexrun"
+vim.g.vimtex_compiler_latexmk = {
+    options = {
+        "-synctex=0",
+        "-outdir=temp"
+    }
+}
+vim.g.vimtex_compiler_latexmk_engines = {
+    _ = "-xelatex"
+}
 vim.cmd([[
 ]])
 -- vim.opt.textwidth = 80

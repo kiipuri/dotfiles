@@ -27,8 +27,8 @@ which_key.register({
         t = { "<cmd>ToggleTerm direction=float<cr>", "Toggle floating terminal" },
         l = { "<cmd>ToggleTerm direction=vertical<cr>", "Toggle right terminal" },
         c = "Cargo run",
-        g = "Lazygit",
     },
+    g = { "Lazygit" },
     n = { "<cmd>NvimTreeToggle<cr>", "Toggle NvimTree" },
     b = { "<cmd>lua require'telescope.builtin'.buffers(require'telescope.themes'.get_dropdown{previewer = false, initial_mode='normal'})<cr>",
         "Find buffers" },
@@ -37,12 +37,21 @@ which_key.register({
         d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
         f = { "<cmd>lua vim.lsp.buf.references()<cr>", "References" },
         r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Refactor" },
-        s = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", "Show line diagnostics" },
+        s = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Show line diagnostics" },
         c = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code actions" },
         h = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
     },
     x = { "<cmd>VimtexCompile<cr>", "Compile LaTeX" },
     h = { "<cmd>noh<cr>", "Disable highlight" },
+    e = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
+    j = { name = "Harpoon",
+        m = { "<cmd>lua require'harpoon.mark'.add_file()<cr>", "Mark" },
+        t = { "<cmd>lua require'harpoon.ui'.toggle_quick_menu()<cr>", "Toggle menu" },
+        f = { "<cmd>lua require'harpoon.ui'.nav_file(1)<cr>", "Open file 1" },
+        d = { "<cmd>lua require'harpoon.ui'.nav_file(2)<cr>", "Open file 2" },
+        s = { "<cmd>lua require'harpoon.ui'.nav_file(3)<cr>", "Open file 3" },
+        a = { "<cmd>lua require'harpoon.ui'.nav_file(4)<cr>", "Open file 4" },
+    },
 
 }, { prefix = "<leader>" })
 
@@ -50,5 +59,6 @@ which_key.register({
     g = {
         c = "Toggle linewise comment",
         b = "Toggle blockwise comment"
-    }
+    },
+    -- K = { "<cmd>m -1<cr>", "Move line up" },
 })

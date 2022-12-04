@@ -22,6 +22,9 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 local dpi = require "beautiful.xresources".apply_dpi
 
+--Autorun
+awful.spawn.with_shell("~/autorun.sh")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -229,7 +232,7 @@ awful.screen.connect_for_each_screen(function(s)
                 beautiful.foreground_blue ..
                 "' background='" ..
                 beautiful.bg_widget ..
-                "'><span font='JetBrainsMono Nerd Font Regular 13'> </span>" .. stdout .. "</span>")
+                "'><span font='JetBrainsMono Nerd Font Regular 13'> </span>" .. stdout .. "</span>")
         end)
 
     -- local updates_widget = awful.widget.watch("bash -c 'checkupdates | wc -l'", 600, function(widget, stdout)

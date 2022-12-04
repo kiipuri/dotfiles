@@ -1,7 +1,0 @@
-#!/bin/sh
-
-interface="$(ip addr | awk '/state UP/ {print $2}' | head -n1 | sed 's/://')"
-down="$(ifstat $interface | grep $interface | awk '{print $7}')"
-up="$(ifstat $interface | grep $interface | awk '{print $9}')"
-netuse="$down  $up "
-echo "$interface: $netuse"

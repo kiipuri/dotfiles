@@ -36,7 +36,7 @@ if [ -f "$LFCD" ]; then
 fi
 
 # Aliases
-source $HOME/.bash_aliases
+source $ZDOTDIR/.bash_aliases
 
 # Plugins
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh

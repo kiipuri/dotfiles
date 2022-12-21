@@ -10,6 +10,20 @@ set ifs "\n"
 
 cmd trash %trash-put $fx
 
+cmd sudotrash ${{
+    sudo trash-put $fx
+}}
+
+cmd sudopaste ${{
+    set -- $(cat ~/.local/share/lf/files)
+    mode="$1"
+    shift
+    case "$mode" in
+        copy) sudo cp -r "$@" .;;
+        move) sudo mv "$@" .;;
+    esac
+}}
+
 cmd open ${{
     test -L $f && f=$(readlink -f $f)
     case $(file --mime-type $f -b) in
@@ -19,31 +33,37 @@ cmd open ${{
 }}
 
 cmd unarchive ${{
-  case "$f" in
-      *.zip) unzip "$f" ;;
-      *.tar.gz) tar -xzf "$f" ;;
-      *.tar.bz2) tar -xjf "$f" ;;
-      *.tar.xz) tar -xf "$f" ;;
-      *.tar) tar -xvf "$f" ;;
-      *.rar) unrar e "$f" ;;
-      *) echo "Unsupported format" ;;
-  esac
+    case "$f" in
+        *.zip) unzip "$f" ;;
+        *.tar.gz) tar -xzf "$f" ;;
+        *.tar.bz2) tar -xjf "$f" ;;
+        *.tar.xz) tar -xf "$f" ;;
+        *.tar) tar -xvf "$f" ;;
+        *.rar) unrar e "$f" ;;
+        *) echo "Unsupported format" ;;
+    esac
 }}
 
 cmd mkdir ${{
-  printf "Directory Name: "
-  read ans
-  mkdir $ans
+    printf "Directory Name: "
+    read ans
+    mkdir $ans
 }}
 
 cmd mkfile ${{
-  printf "File Name: "
-  read ans
-  $EDITOR $ans
+    printf "File Name: "
+    read ans
+    $EDITOR $ans
 }}
 
 cmd zip ${{
-    zip -r "$f".zip "$f"
+    files=()
+    absfiles=("$fx")
+    for f in $absfiles; do
+        bname=$(basename $f)
+        files+=($bname)
+    done
+    zip -r "$f".zip . -i ${files[@]}
 }}
 
 cmd z %{{
@@ -62,6 +82,8 @@ cmd zi ${{
 map m
 map au unarchive
 map x trash
+map sx sudotrash
+map sp sudopaste
 map <enter> shell
 map mf mkfile
 map md mkdir

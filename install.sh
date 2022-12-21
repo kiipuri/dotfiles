@@ -48,7 +48,7 @@ nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync" > /dev/
 nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync" > /dev/null 2>&1
 
 # export ZDOTDIR environment variable
-echo "export ZDOTDIR=$HOME/.config/zsh" > /etc/zsh/zshenv
+echo "export ZDOTDIR=$HOME/.config/zsh" | sudo tee /etc/zsh/zshenv
 
 sudo systemctl enable cronie
 (crontab -l 2>/dev/null; echo -e "*/10 * * * * echo \"\$(checkupdates | wc -l)\" > $HOME/scripts/blocks/.updates") | crontab -

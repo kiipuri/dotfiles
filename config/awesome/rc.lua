@@ -236,10 +236,11 @@ awful.screen.connect_for_each_screen(function(s)
         end)
 
     -- local updates_widget = awful.widget.watch("bash -c 'checkupdates | wc -l'", 600, function(widget, stdout)
-    local updates_widget = awful.widget.watch("bash -c 'cat /tmp/updates'", 600, function(widget, stdout)
-        widget:set_markup("<span foreground='" ..
-            beautiful.foreground_green .. "' background='" .. beautiful.bg_widget .. "'> " .. stdout .. "</span>")
-    end)
+    local updates_widget = awful.widget.watch("bash -c 'cat $HOME/scripts/blocks/.updates'", 600,
+        function(widget, stdout)
+            widget:set_markup("<span foreground='" ..
+                beautiful.foreground_green .. "' background='" .. beautiful.bg_widget .. "'> " .. stdout .. "</span>")
+        end)
 
     local wid = awful.widget.watch("bash -c 'date +\"%A, %d.%m.%Y\"'", 10, function(widget, stdout)
         widget:set_markup("<span foreground='" ..

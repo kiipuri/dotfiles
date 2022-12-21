@@ -31,6 +31,50 @@ function _ADD_CURR_DIR_TO_PROJECTS()
     vim.cmd("!echo " .. curr_directory .. " >> " .. historyfile)
 end
 
+vim.g.tex_building = false
+
+function _MAKE_TEX()
+    vim.g.tex_building = not vim.g.tex_building
+
+    if (vim.g.tex_building == false) then
+        print("Stopped building LaTeX")
+        return
+    end
+
+    print("Building LaTeX")
+
+    local fname = vim.fn.expand("%")
+    local fbase = fname:sub(1, -5)
+
+    local handle = io.popen("stat -c %Y " .. fname)
+    local modified
+    if handle ~= nil then
+        modified = handle:read()
+        handle:close()
+    end
+
+    local timer = vim.loop.new_timer()
+    timer:start(0, 1000, function()
+        handle = io.popen("stat -c %Y " .. fname)
+        local modified2
+        if handle ~= nil then
+            modified2 = handle:read()
+            handle:close()
+        end
+
+        if (modified ~= modified2) then
+            os.execute("NAME=" .. fbase .. " make")
+            modified = modified2
+        end
+
+        if (vim.g.tex_building == false) then
+            timer:close()
+        end
+    end)
+end
+
+vim.cmd("command! MakeTex lua _MAKE_TEX()")
+
 vim.cmd("command! ProjectAddManually lua _ADD_CURR_DIR_TO_PROJECTS()")
 
 -- Delete without yanking

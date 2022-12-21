@@ -41,7 +41,8 @@ which_key.register({
         c = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code actions" },
         h = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
     },
-    x = { "<cmd>VimtexCompile<cr>", "Compile LaTeX" },
+    -- x = { "<cmd>VimtexCompile<cr>", "Compile LaTeX" },
+    x = { "<cmd>MakeTex<cr>", "Compile LaTeX" },
     h = { "<cmd>noh<cr>", "Disable highlight" },
     e = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
     j = { name = "Harpoon",
@@ -51,6 +52,7 @@ which_key.register({
         d = { "<cmd>lua require'harpoon.ui'.nav_file(2)<cr>", "Open file 2" },
         s = { "<cmd>lua require'harpoon.ui'.nav_file(3)<cr>", "Open file 3" },
         a = { "<cmd>lua require'harpoon.ui'.nav_file(4)<cr>", "Open file 4" },
+        o = { "<cmd>lua require'telescope.builtin'.find_files()<cr>", "Find files" },
     },
 
 }, { prefix = "<leader>" })

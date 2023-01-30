@@ -25,6 +25,8 @@ local dpi = require "beautiful.xresources".apply_dpi
 --Autorun
 awful.spawn.with_shell("~/autorun.sh")
 
+awesome.set_preferred_icon_size(64)
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -665,4 +667,6 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
+-- Run dunst and disable naughty
+awful.spawn("dunst")
 package.loaded["naughty.dbus"] = {}

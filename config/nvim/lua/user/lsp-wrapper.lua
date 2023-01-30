@@ -32,6 +32,16 @@ if not omni_status_ok then
     return
 end
 
+local vls_status_ok = pcall(require, "user.lsp.vue-ls")
+if not vls_status_ok then
+    return
+end
+
+local eslint_status_ok = pcall(require, "user.lsp.eslint-ls")
+if not eslint_status_ok then
+    return
+end
+
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local cmp_lsp_status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")

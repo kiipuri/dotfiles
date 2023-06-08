@@ -20,14 +20,15 @@ cmd sudopaste ${{
     shift
     case "$mode" in
         copy) sudo cp -r "$@" .;;
-        move) sudo mv "$@" .;;
+        move)
+            sudo mv "$@" .;;
     esac
 }}
 
 cmd open ${{
     test -L $f && f=$(readlink -f $f)
     case $(file --mime-type $f -b) in
-        text/*|application/json) $EDITOR $fx;;
+        text/*|application/json|application/x-subrip) $EDITOR $fx;;
         *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
 }}
@@ -39,7 +40,7 @@ cmd unarchive ${{
         *.tar.bz2) tar -xjf "$f" ;;
         *.tar.xz) tar -xf "$f" ;;
         *.tar.zst) tar --use-compress-program=unzstd -xf "$f" ;;
-        *.tar) tar -xvf "$f" ;;
+        *.tar|*.tgz) tar -xvf "$f" ;;
         *.rar) unrar e "$f" ;;
         *) echo "Unsupported format" ;;
     esac
@@ -64,7 +65,7 @@ cmd zip ${{
         bname=$(basename $f)
         files+=($bname)
     done
-    zip -r "$f".zip . -i ${files[@]}
+    zip -r "$f" ${files[@]}
 }}
 
 cmd z %{{
@@ -81,6 +82,9 @@ cmd zi ${{
 }}
 
 map m
+map mm mark-save
+map ml mark-load
+map mr mark-remove
 map au unarchive
 map x trash
 map sx sudotrash

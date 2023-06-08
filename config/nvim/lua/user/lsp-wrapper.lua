@@ -27,8 +27,13 @@ if not rust_status_ok then
     return
 end
 
-local omni_status_ok = pcall(require, "user.lsp.omnisharp-ls")
-if not omni_status_ok then
+-- local omni_status_ok = pcall(require, "user.lsp.omnisharp-ls")
+-- if not omni_status_ok then
+--     return
+-- end
+
+local csharp_status_ok = pcall(require, "user.lsp.csharp-ls")
+if not csharp_status_ok then
     return
 end
 
@@ -39,6 +44,16 @@ end
 
 local eslint_status_ok = pcall(require, "user.lsp.eslint-ls")
 if not eslint_status_ok then
+    return
+end
+
+local angular_status_ok = pcall(require, "user.lsp.angular-ls")
+if not angular_status_ok then
+    return
+end
+
+local null_ls_status_ok = pcall(require, "user.lsp.null-ls")
+if not null_ls_status_ok then
     return
 end
 
@@ -56,7 +71,7 @@ if not lspconfig_status_ok then
 end
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver' }
+local servers = { 'clangd', 'rust_analyzer', 'tsserver' }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
         o_attach = function(client)
@@ -88,7 +103,7 @@ cmp.setup {
     mapping = cmp.mapping.preset.insert({
         ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
         ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-d>'] = cmp.mapping.scroll_docs( -4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         --['<C-Space>'] = cmp.mapping.complete(),
         ['<CR>'] = cmp.mapping.confirm {
@@ -102,28 +117,25 @@ cmp.setup {
         --         fallback()
         --     end
         -- end, { "i" }),
-        ['<Tab>'] = cmp.mapping(function(fallback)
+        -- ['<Tab>'] = cmp.mapping(function(fallback)
+        --     if cmp.visible() then
+        --         cmp.select_next_item()
+        --
+        -- elseif luasnip.expand_or_jumpable() then
+        --     luasnip.expand_or_jump()
+        -- else
+        --     fallback()
+        -- end
+        -- end, { 'i', 's' }),
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
-                cmp.select_next_item()
+                cmp.select_prev_item()
+            elseif luasnip.jumpable( -1) then
+                luasnip.jump( -1)
             else
                 fallback()
             end
-
-            --     elseif luasnip.expand_or_jumpable() then
-            --         luasnip.expand_or_jump()
-            --     else
-            --         fallback()
-            --     end
         end, { 'i', 's' }),
-        -- ['<S-Tab>'] = cmp.mapping(function(fallback)
-        --     if cmp.visible() then
-        --         cmp.select_prev_item()
-        --     elseif luasnip.jumpable(-1) then
-        --         luasnip.jump(-1)
-        --     else
-        --         fallback()
-        --     end
-        -- end, { 'i', 's' }),
     }),
     sources = {
         { name = 'nvim_lsp' },
@@ -149,13 +161,13 @@ cmp.setup {
 
             -- NOTE: order matters
             vim_item.menu = ({
-                nvim_lsp = "",
-                nvim_lua = "",
-                luasnip = "",
-                buffer = "",
-                path = "",
-                emoji = "",
-            })[entry.source.name]
+                    nvim_lsp = "",
+                    nvim_lua = "",
+                    luasnip = "",
+                    buffer = "",
+                    path = "",
+                    emoji = "",
+                })[entry.source.name]
             return vim_item
         end,
     },

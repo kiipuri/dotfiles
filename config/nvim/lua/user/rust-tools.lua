@@ -3,6 +3,7 @@ if not status_ok then
     return
 end
 
+
 rust_tools.setup {
     tools = {
         execute = require "rust-tools.executors".quickfix,

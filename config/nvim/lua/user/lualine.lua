@@ -29,6 +29,7 @@ vim.api.nvim_set_hl(0, "SLTermIcon", { fg = "#b668cd", bg = "#16161e" })
 vim.api.nvim_set_hl(0, "SLBranchName", { fg = "#abb2bf", bg = sl_hl.background, bold = false })
 vim.api.nvim_set_hl(0, "SLProgress", { fg = "#b668cd", bg = "#16161e" })
 vim.api.nvim_set_hl(0, "SLLocation", { fg = "#519fdf", bg = "#16161e" })
+vim.api.nvim_set_hl(0, "SLFilename", { fg = "#009933", bg = "#16161e" })
 vim.api.nvim_set_hl(0, "SLFT", { fg = "#46a6b2", bg = "#16161e" })
 vim.api.nvim_set_hl(0, "SLIndent", { fg = "#c18a56", bg = "#16161e" })
 vim.api.nvim_set_hl(0, "SLLSP", { fg = "#6b727f", bg = sl_hl.background })
@@ -385,7 +386,7 @@ local lanuage_server = {
         local language_servers = ""
         local client_names_str_len = #client_names_str
         if client_names_str_len ~= 0 then
-            language_servers = hl_str("", "SLSep") .. hl_str(client_names_str, "SLSeparator") .. hl_str("", "SLSep")
+            language_servers = hl_str("", "SLSep") .. hl_str(client_names_str, "SLSeparator") .. hl_str("", "SLSep")
         end
         if copilot_active then
             language_servers = language_servers .. "%#SLCopilot#" .. " " .. icons.git.Octoface .. "%*"
@@ -413,6 +414,37 @@ local location = {
     padding = 0,
 }
 
+-- local filename = {
+--     "filename",
+--     fmt = function()
+--         -- return "▊"
+--         return hl_str("", "SLSep") .. "ashdfasjf" .. vim.cmd("echo expand('%')") .. hl_str(" ", "SLSep")
+--         -- return "  "
+--     end,
+--     -- color = "SLProgress",
+--     padding = 0,
+-- }
+
+local my_location = {
+    function()
+        -- return "▊"
+        local l,c = unpack(vim.api.nvim_win_get_cursor(0))
+        return hl_str(" ", "SLSep") .. hl_str(l .. ":" .. c, "SLLocation") .. hl_str(" ", "SLSep")
+        -- return "  "
+    end,
+    padding = 0,
+}
+
+local filename = {
+    "filename",
+    fmt = function(str)
+        -- return "▊"
+        return hl_str(" ", "SLSep") .. hl_str(str, "SLFilename") .. hl_str(" ", "SLSep")
+        -- return "  "
+    end,
+    padding = 0,
+}
+
 lualine.setup {
     options = {
         globalstatus = true,
@@ -427,13 +459,13 @@ lualine.setup {
     sections = {
         lualine_a = { left_pad, mode, branch, right_pad },
         lualine_b = { left_pad, diagnostics, right_pad },
-        lualine_c = { current_signature },
+        lualine_c = { filename },
         -- lualine_x = { diff, spaces, "encoding", filetype },
         -- lualine_x = { diff, lanuage_server, spaces, filetype },
         -- lualine_x = { lanuage_server, spaces, filetype },
         lualine_x = { lanuage_server, spaces, filetype },
         lualine_y = {},
-        lualine_z = { location, progress },
+        lualine_z = { my_location, progress },
     },
     inactive_sections = {
         lualine_a = {},

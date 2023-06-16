@@ -1,5 +1,5 @@
 vim.g.use_nerd_icons = true
-if vim.fn.has "mac" == 1 or vim.g.use_nerd_icons then
+if vim.fn.has("mac") == 1 or vim.g.use_nerd_icons then
     -- elseif vim.fn.has "mac" == 1 then
     return {
         kind = {

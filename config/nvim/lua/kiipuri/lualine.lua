@@ -1,4 +1,4 @@
-M = {}
+local M = {}
 local status_ok, lualine = pcall(require, "lualine")
 if not status_ok then
     return
@@ -54,7 +54,6 @@ local mode_color = {
     n = "#519fdf",
     i = "#c18a56",
     v = "#b668cd",
-    [""] = "#b668cd",
     V = "#b668cd",
     -- c = '#B5CEA8',
     -- c = '#D7BA7D',
@@ -62,7 +61,6 @@ local mode_color = {
     no = "#D16D9E",
     s = "#88b369",
     S = "#c18a56",
-    [""] = "#c18a56",
     ic = "#d05c65",
     R = "#D16D9E",
     Rv = "#d05c65",
@@ -141,7 +139,7 @@ local hide_in_width_100 = function()
     return vim.o.columns > 100
 end
 
-local icons = require "user.icons"
+local icons = require("kiipuri.icons")
 
 local diagnostics = {
     "diagnostics",
@@ -360,7 +358,7 @@ local lanuage_server = {
         end
 
         -- add formatter
-        local s = require "null-ls.sources"
+        local s = require("null-ls.sources")
         local available_sources = s.get_available(buf_ft)
         local registered = {}
         for _, source in ipairs(available_sources) do
@@ -386,7 +384,9 @@ local lanuage_server = {
         local language_servers = ""
         local client_names_str_len = #client_names_str
         if client_names_str_len ~= 0 then
-            language_servers = hl_str("", "SLSep") .. hl_str(client_names_str, "SLSeparator") .. hl_str("", "SLSep")
+            language_servers = hl_str("", "SLSep")
+                .. hl_str(client_names_str, "SLSeparator")
+                .. hl_str("", "SLSep")
         end
         if copilot_active then
             language_servers = language_servers .. "%#SLCopilot#" .. " " .. icons.git.Octoface .. "%*"
@@ -428,7 +428,7 @@ local location = {
 local my_location = {
     function()
         -- return "▊"
-        local l,c = unpack(vim.api.nvim_win_get_cursor(0))
+        local l, c = unpack(vim.api.nvim_win_get_cursor(0))
         return hl_str(" ", "SLSep") .. hl_str(l .. ":" .. c, "SLLocation") .. hl_str(" ", "SLSep")
         -- return "  "
     end,
@@ -445,7 +445,7 @@ local filename = {
     padding = 0,
 }
 
-lualine.setup {
+lualine.setup({
     options = {
         globalstatus = true,
         icons_enabled = true,
@@ -477,6 +477,6 @@ lualine.setup {
     },
     tabline = {},
     extensions = {},
-}
+})
 
 vim.cmd('lua vim.api.nvim_set_hl(0, "lualine_c_normal", { fg = "NONE", bg = "NONE" })')

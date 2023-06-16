@@ -14,21 +14,21 @@ vim.opt.title = true
 vim.g.vimtex_view_method = "zathura"
 vim.g.vimtex_general_viewer = "zathura"
 vim.g.vimtex_compiler_latexmk = {
-	options = {
-		"-synctex=0",
-		"-outdir=temp",
-	},
+    options = {
+        "-synctex=0",
+        "-outdir=temp",
+    },
 }
 vim.g.vimtex_compiler_latexmk_engines = {
-	_ = "-xelatex",
+    _ = "-xelatex",
 }
 
 local status_ok, _ = pcall(vim.cmd, "colorscheme tokyonight")
 if status_ok then
-	vim.g.tokyonight_style = "night"
-	vim.api.nvim_command([[colorscheme tokyonight-night]])
+    vim.g.tokyonight_style = "night"
+    vim.api.nvim_command([[colorscheme tokyonight-night]])
 end
 
 vim.diagnostic.config({
-	virtual_text = false,
+    virtual_text = false,
 })

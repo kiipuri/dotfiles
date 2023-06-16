@@ -3,13 +3,13 @@ if not status_ok then
     return
 end
 
-configs.setup {
+configs.setup({
     ensure_installed = "all",
     highlight = {
-        enable = true
+        enable = true,
     },
     autopairs = {
-        enable = true
+        enable = true,
     },
-    indent = { enable = true }
-}
+    indent = { enable = true },
+})
